@@ -1,0 +1,209 @@
+{
+  "timestamp": "2026-02-27T11:49:46.855626Z",
+  "session_id": "daq_20260227_114850_791b74",
+  "validation_status": "approved_with_adjustments",
+  "overall_risk_level": "elevated",
+  "confidence": 0.8,
+  "risk_audits": [
+    {
+      "audit_name": "regime_consistency",
+      "verdict": "warning",
+      "severity": 0.4,
+      "finding": "Crypto (7%) is high for elevated volatility state \u2014 crypto correlations increase in stress",
+      "recommendation": "Reduce equity to \u226440%, crypto to \u22648%, increase defensive to \u226535%",
+      "details": {
+        "regime": "bear_high_vol",
+        "regime_rules": {
+          "max_equity": 0.4,
+          "max_crypto": 0.08,
+          "min_defensive": 0.35,
+          "description": "Bear regime: defensive posture required"
+        },
+        "allocation_weights": {
+          "SPY": 0.225,
+          "BND": 0.35,
+          "GLD": 0.2238,
+          "BTC": 0.0703,
+          "CASH": 0.1309
+        },
+        "strategy": "balanced",
+        "vol_state": "elevated"
+      }
+    },
+    {
+      "audit_name": "profile_alignment",
+      "verdict": "pass",
+      "severity": 0.0,
+      "finding": "Allocation aligns with investor profile",
+      "recommendation": "No adjustments needed",
+      "details": {
+        "risk_score": 0.5356,
+        "behavioral_type": "moderate_volatile",
+        "profile_rules": {
+          "max_equity": 0.45,
+          "max_crypto": 0.08,
+          "min_cash": 0.1
+        },
+        "risky_weight": 0.2953,
+        "expected_risky_max": 0.5678
+      }
+    },
+    {
+      "audit_name": "drawdown_guardrails",
+      "verdict": "pass",
+      "severity": 0.0,
+      "finding": "Drawdown risk within acceptable limits",
+      "recommendation": "No adjustments needed",
+      "details": {
+        "investor_max_dd": 0.23,
+        "median_dd": 0.0916,
+        "prob_loss": 0.287,
+        "prob_severe": 0.0061,
+        "var_95": 0.1098,
+        "cvar_95": 0.147,
+        "worst_case": -0.1702
+      }
+    },
+    {
+      "audit_name": "concentration_audit",
+      "verdict": "warning",
+      "severity": 0.4,
+      "finding": "Crypto at 7% during elevated volatility \u2014 correlations spike in stress, cap at 5%",
+      "recommendation": "Reduce concentration in dominant assets. Rebalance towards equal risk contribution.",
+      "details": {
+        "hhi_index": 0.2453,
+        "weights": {
+          "SPY": 0.225,
+          "BND": 0.35,
+          "GLD": 0.2238,
+          "BTC": 0.0703,
+          "CASH": 0.1309
+        },
+        "risk_contributions": {
+          "SPY": 0.2918,
+          "BND": 0.0414,
+          "GLD": 0.2394,
+          "BTC": 0.4274,
+          "CASH": 0.0
+        },
+        "non_zero_assets": 5,
+        "max_risk_contributor": "BTC"
+      }
+    },
+    {
+      "audit_name": "cross_agent_coherence",
+      "verdict": "pass",
+      "severity": 0.0,
+      "finding": "Cross-agent signals are coherent",
+      "recommendation": "No adjustments needed",
+      "details": {
+        "regime": "bear_high_vol",
+        "risk_category": "low",
+        "models_agree": false,
+        "risk_score": 0.5356,
+        "behavioral_type": "moderate_volatile",
+        "consistency": 0.07,
+        "stability": "moderate",
+        "strategy": "balanced"
+      }
+    }
+  ],
+  "total_audits": 5,
+  "audits_passed": 3,
+  "audits_warned": 2,
+  "audits_failed": 0,
+  "adjusted_allocation": [
+    {
+      "ticker": "SPY",
+      "original_weight": 0.225,
+      "adjusted_weight": 0.225,
+      "change": 0.0,
+      "reason": "No change required"
+    },
+    {
+      "ticker": "BND",
+      "original_weight": 0.35,
+      "adjusted_weight": 0.3561,
+      "change": 0.0061,
+      "reason": "Increased from 35% to 36% \u2014 defensive floor to maintain safety margins"
+    },
+    {
+      "ticker": "GLD",
+      "original_weight": 0.2238,
+      "adjusted_weight": 0.2269,
+      "change": 0.0031,
+      "reason": "No change required"
+    },
+    {
+      "ticker": "BTC",
+      "original_weight": 0.0703,
+      "adjusted_weight": 0.05,
+      "change": -0.0203,
+      "reason": "Reduced from 7% to 5% \u2014 regime constraints require lower exposure"
+    },
+    {
+      "ticker": "CASH",
+      "original_weight": 0.1309,
+      "adjusted_weight": 0.1419,
+      "change": 0.011,
+      "reason": "Increased from 13% to 14% \u2014 defensive floor to maintain safety margins"
+    }
+  ],
+  "original_allocation_preserved": false,
+  "risk_verdict": {
+    "decision": "approved_with_adjustments",
+    "confidence": 0.8,
+    "reasoning": "While the adjusted allocation addresses the identified risks, residual risks remain. The portfolio's value-at-risk (10.98%) and conditional value-at-risk (14.7%) are notable, and the systemic risk, although low (0.09), warrants continued monitoring. The models' disagreement (models_agree: False) also introduces uncertainty. Therefore, ongoing surveillance and potential further adjustments will be necessary to ensure the portfolio remains aligned with the investor's risk profile and market conditions.",
+    "critical_risks": [
+      "High crypto exposure (7%) during elevated volatility",
+      "Crypto's high risk contribution (42.74%)"
+    ],
+    "mitigations_applied": [
+      "Reducing crypto exposure to 5%",
+      "Increasing defensive assets (BND and CASH)"
+    ],
+    "residual_risks": [
+      "Value-at-risk (10.98%) and conditional value-at-risk (14.7%)",
+      "Systemic risk (0.09) and models' disagreement"
+    ]
+  },
+  "market_regime": "bear_high_vol",
+  "investor_risk_score": 0.5356,
+  "proposed_strategy": "balanced",
+  "agent_metadata": {
+    "agent_id": "agent4_risk_supervisor",
+    "version": "1.0.0",
+    "execution_time_ms": 2868,
+    "llm_calls": 1,
+    "llm_total_latency_ms": 2337,
+    "models_used": [
+      "regime_consistency_auditor_v1",
+      "profile_alignment_auditor_v1",
+      "drawdown_guardrails_v1",
+      "concentration_auditor_v1",
+      "cross_agent_coherence_v1",
+      "allocation_adjuster_v1",
+      "llm_core_model"
+    ],
+    "execution_log": [
+      {
+        "step": "risk_audits",
+        "status": "success",
+        "duration_ms": 1,
+        "timestamp": "2026-02-27T11:49:43.988243Z"
+      },
+      {
+        "step": "allocation_adjustment",
+        "status": "success",
+        "duration_ms": 0,
+        "timestamp": "2026-02-27T11:49:43.988243Z"
+      },
+      {
+        "step": "cro_adjudication",
+        "status": "success",
+        "duration_ms": 2866,
+        "timestamp": "2026-02-27T11:49:46.855125Z"
+      }
+    ]
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "timestamp": "2026-02-27T11:40:54.720184Z",
+  "session_id": "daq_20260227_114022_d5ed62",
+  "validation_status": "approved",
+  "overall_risk_level": "low",
+  "confidence": 0.85,
+  "risk_audits": [
+    {
+      "audit_name": "regime_consistency",
+      "verdict": "pass",
+      "severity": 0.0,
+      "finding": "Allocation consistent with regime",
+      "recommendation": "No adjustments needed",
+      "details": {
+        "regime": "bull_low_vol",
+        "regime_rules": {
+          "max_equity": 0.65,
+          "max_crypto": 0.2,
+          "min_defensive": 0.15,
+          "description": "Bull low vol: growth-oriented acceptable"
+        },
+        "allocation_weights": {
+          "SPY": 0.35,
+          "BND": 0.225,
+          "GLD": 0.2242,
+          "BTC": 0.0693,
+          "CASH": 0.1314
+        },
+        "strategy": "balanced",
+        "vol_state": "normal"
+      }
+    },
+    {
+      "audit_name": "profile_alignment",
+      "verdict": "pass",
+      "severity": 0.0,
+      "finding": "Allocation aligns with investor profile",
+      "recommendation": "No adjustments needed",
+      "details": {
+        "risk_score": 0.5153,
+        "behavioral_type": "moderate_balanced",
+        "profile_rules": {
+          "max_equity": 0.5,
+          "max_crypto": 0.1,
+          "min_cash": 0.08
+        },
+        "risky_weight": 0.4193,
+        "expected_risky_max": 0.5576
+      }
+    },
+    {
+      "audit_name": "drawdown_guardrails",
+      "verdict": "pass",
+      "severity": 0.0,
+      "finding": "Drawdown risk within acceptable limits",
+      "recommendation": "No adjustments needed",
+      "details": {
+        "investor_max_dd": 0.23,
+        "median_dd": 0.0717,
+        "prob_loss": 0.1657,
+        "prob_severe": 0.0005,
+        "var_95": 0.0598,
+        "cvar_95": 0.0949,
+        "worst_case": -0.1183
+      }
+    },
+    {
+      "audit_name": "concentration_audit",
+      "verdict": "pass",
+      "severity": 0.0,
+      "finding": "Portfolio adequately diversified",
+      "recommendation": "No adjustments needed",
+      "details": {
+        "hhi_index": 0.2455,
+        "weights": {
+          "SPY": 0.35,
+          "BND": 0.225,
+          "GLD": 0.2242,
+          "BTC": 0.0693,
+          "CASH": 0.1314
+        },
+        "risk_contributions": {
+          "SPY": 0.4552,
+          "BND": 0.0104,
+          "GLD": 0.1728,
+          "BTC": 0.3616,
+          "CASH": 0.0
+        },
+        "non_zero_assets": 5,
+        "max_risk_contributor": "SPY"
+      }
+    },
+    {
+      "audit_name": "cross_agent_coherence",
+      "verdict": "pass",
+      "severity": 0.0,
+      "finding": "Cross-agent signals are coherent",
+      "recommendation": "No adjustments needed",
+      "details": {
+        "regime": "bull_low_vol",
+        "risk_category": "low",
+        "models_agree": true,
+        "risk_score": 0.5153,
+        "behavioral_type": "moderate_balanced",
+        "consistency": 0.76,
+        "stability": "stable",
+        "strategy": "balanced"
+      }
+    }
+  ],
+  "total_audits": 5,
+  "audits_passed": 5,
+  "audits_warned": 0,
+  "audits_failed": 0,
+  "adjusted_allocation": [],
+  "original_allocation_preserved": true,
+  "risk_verdict": {
+    "decision": "approved",
+    "confidence": 0.85,
+    "reasoning": "However, I do note that the portfolio's risk profile is not without risks. The crypto allocation, although limited, still contributes significantly to the portfolio's risk, with a risk contribution of 0.3616. Additionally, the portfolio's expected drawdown risk, although within acceptable limits, is still a concern. To mitigate these risks, I would recommend ongoing monitoring of the portfolio's performance and risk profile, as well as regular rebalancing to ensure that the allocation remains aligned with the investor's risk profile and market context.",
+    "critical_risks": [
+      "Crypto allocation risk contribution of 0.3616",
+      "Expected drawdown risk of 0.0717"
+    ],
+    "mitigations_applied": [
+      "Diversification across asset classes",
+      "Regular portfolio rebalancing"
+    ],
+    "residual_risks": [
+      "Market regime change risk",
+      "Systemic risk"
+    ]
+  },
+  "market_regime": "bull_low_vol",
+  "investor_risk_score": 0.5153,
+  "proposed_strategy": "balanced",
+  "agent_metadata": {
+    "agent_id": "agent4_risk_supervisor",
+    "version": "1.0.0",
+    "execution_time_ms": 2509,
+    "llm_calls": 1,
+    "llm_total_latency_ms": 2078,
+    "models_used": [
+      "regime_consistency_auditor_v1",
+      "profile_alignment_auditor_v1",
+      "drawdown_guardrails_v1",
+      "concentration_auditor_v1",
+      "cross_agent_coherence_v1",
+      "allocation_adjuster_v1",
+      "llm_core_model"
+    ],
+    "execution_log": [
+      {
+        "step": "risk_audits",
+        "status": "success",
+        "duration_ms": 1,
+        "timestamp": "2026-02-27T11:40:52.212003Z"
+      },
+      {
+        "step": "allocation_adjustment",
+        "status": "success",
+        "duration_ms": 0,
+        "timestamp": "2026-02-27T11:40:52.212003Z"
+      },
+      {
+        "step": "cro_adjudication",
+        "status": "success",
+        "duration_ms": 2508,
+        "timestamp": "2026-02-27T11:40:54.720184Z"
+      }
+    ]
+  }
+}

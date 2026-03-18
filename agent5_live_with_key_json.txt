@@ -1,0 +1,1242 @@
+{"crypto": 0.0, "equities": 0.15, "bonds": 0.0, "commodities": 0.15, "forex": 0.0}
+  Exec Time:    23763ms
+  Data Quality: full
+============================================================
+
+==============================================================
+  AGENT 5 OUTPUT -- News Sentiment Intelligence
+==============================================================
+
+{
+  "timestamp": "2026-03-06T21:47:36.592265+00:00Z",
+  "data_freshness": "Fri, 06 Mar 2026 21:09:00 GMT",
+  "articles": [
+    {
+      "article_id": "3aa6c19e5ec06d0f",
+      "title": "Oil prices are surging. Will that help Tesla and others sell more EVs?",
+      "summary": "A 9% jump in gasoline prices in a week could make electric vehicles look more affordable to consumers.",
+      "source": "marketwatch",
+      "source_url": "https://www.marketwatch.com/story/oil-prices-are-surging-will-that-help-tesla-and-others-sell-more-evs-1f2f3856?mod=mw_rss_topstories",
+      "published_at": "Fri, 06 Mar 2026 21:09:00 GMT",
+      "collected_at": "2026-03-06T21:47:21.843782+00:00",
+      "sentiment": {
+        "label": "positive",
+        "score": 1.0,
+        "confidence": 0.6,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Tesla",
+          "Oil"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "commodities",
+          "equities"
+        ],
+        "organizations": [],
+        "topics": [
+          "commodities"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.201,
+        "source_weight": 0.8,
+        "sentiment_strength": 0.6,
+        "topic_importance": 0.7,
+        "temporal_recency": 0.9285,
+        "entity_relevance": 0.9667,
+        "cluster_boost": 1.0
+      },
+      "topic": "commodities",
+      "relevance_score": 0.3429
+    },
+    {
+      "article_id": "ed6c7c719ca4173d",
+      "title": "Gold prices post worst week since January. The dollar gets part of the blame.",
+      "summary": "Gold and silver rose after weak jobs data were reported, but still finished lower for the week.",
+      "source": "marketwatch",
+      "source_url": "https://www.marketwatch.com/story/gold-is-facing-its-worst-week-since-january-the-dollar-gets-part-of-the-blame-115e4d3d?mod=mw_rss_topstories",
+      "published_at": "Fri, 06 Mar 2026 20:16:00 GMT",
+      "collected_at": "2026-03-06T21:47:21.853422+00:00",
+      "sentiment": {
+        "label": "negative",
+        "score": -1.0,
+        "confidence": 0.6,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Gold",
+          "Silver",
+          "USD"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "commodities",
+          "forex"
+        ],
+        "organizations": [],
+        "topics": [
+          "commodities"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.1815,
+        "source_weight": 0.8,
+        "sentiment_strength": 0.6,
+        "topic_importance": 0.7,
+        "temporal_recency": 0.8384,
+        "entity_relevance": 0.9667,
+        "cluster_boost": 1.0
+      },
+      "topic": "commodities",
+      "relevance_score": 0.4429
+    },
+    {
+      "article_id": "acefef1545510f26",
+      "title": "Oil hits highest level since 2023 as Iran war triggers historic surge",
+      "summary": "US crude benchmark posts biggest weekly rise on record as Trump demands surrender from Tehran",
+      "source": "financial times",
+      "source_url": "https://www.ft.com/content/d3e2c2a1-73aa-4952-b1f1-08c87042b507",
+      "published_at": "Fri, 06 Mar 2026 20:13:51 GMT",
+      "collected_at": "2026-03-06T21:47:21.853422+00:00",
+      "sentiment": {
+        "label": "positive",
+        "score": 1.0,
+        "confidence": 0.6,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Oil",
+          "Crude Oil"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "commodities"
+        ],
+        "organizations": [],
+        "topics": [
+          "geopolitical"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.1808,
+        "source_weight": 0.95,
+        "sentiment_strength": 0.6,
+        "topic_importance": 0.9,
+        "temporal_recency": 0.8349,
+        "entity_relevance": 0.6333,
+        "cluster_boost": 1.0
+      },
+      "topic": "geopolitical",
+      "relevance_score": 0.3429
+    },
+    {
+      "article_id": "ee96f2ab893cb2d3",
+      "title": "U.S. oil prices notch record weekly gain of nearly 36%, as Middle East conflict spurs worries over production cuts",
+      "summary": "Oil prices rallied Friday to set a record weekly gain, with the Middle East starting to feel a squeeze in production and storage capacity as the Iran conflict ran through a seventh day.",
+      "source": "marketwatch",
+      "source_url": "https://www.marketwatch.com/story/oil-at-20-month-high-as-qatar-minister-warns-of-halt-to-energy-shipments-ffd3f8f9?mod=mw_rss_topstories",
+      "published_at": "Fri, 06 Mar 2026 20:35:00 GMT",
+      "collected_at": "2026-03-06T21:47:21.850833+00:00",
+      "sentiment": {
+        "label": "positive",
+        "score": 1.0,
+        "confidence": 0.6,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Oil"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "commodities"
+        ],
+        "organizations": [],
+        "topics": [
+          "geopolitical"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.1336,
+        "source_weight": 0.8,
+        "sentiment_strength": 0.6,
+        "topic_importance": 0.9,
+        "temporal_recency": 0.8696,
+        "entity_relevance": 0.5333,
+        "cluster_boost": 1.0
+      },
+      "topic": "geopolitical",
+      "relevance_score": 0.2429
+    },
+    {
+      "article_id": "d86f777eed0ace81",
+      "title": "Stagflation? $150 oil? Not all 401(k)s are losing money.",
+      "summary": "The problem with crises like this is that stocks and bonds can both fail.",
+      "source": "marketwatch",
+      "source_url": "https://www.marketwatch.com/story/stagflation-150-oil-not-all-401-k-s-are-losing-money-09c302cb?mod=mw_rss_topstories",
+      "published_at": "Fri, 06 Mar 2026 20:06:00 GMT",
+      "collected_at": "2026-03-06T21:47:21.853422+00:00",
+      "sentiment": {
+        "label": "positive",
+        "score": 1.0,
+        "confidence": 0.6,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Oil",
+          "Bonds"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "commodities",
+          "bonds"
+        ],
+        "organizations": [],
+        "topics": [
+          "general_market"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.1272,
+        "source_weight": 0.8,
+        "sentiment_strength": 0.6,
+        "topic_importance": 0.5,
+        "temporal_recency": 0.8224,
+        "entity_relevance": 0.9667,
+        "cluster_boost": 1.0
+      },
+      "topic": "general_market",
+      "relevance_score": 0.4857
+    },
+    {
+      "article_id": "8d3c9f07e1689c99",
+      "title": "Crude-oil futures haven t been this overbought since 1990. That doesn t mean the rally is over.",
+      "summary": "A momentum indicator for a crude futures chart has soared to its highest level in 36 years, but as the Wall Street saying goes, overbought doesn t mean over.",
+      "source": "marketwatch",
+      "source_url": "https://www.marketwatch.com/story/crude-oil-futures-havent-been-this-overbought-since-1990-that-doesnt-mean-the-rally-is-over-1550e567?mod=mw_rss_topstories",
+      "published_at": "Fri, 06 Mar 2026 20:45:00 GMT",
+      "collected_at": "2026-03-06T21:47:21.843782+00:00",
+      "sentiment": {
+        "label": "positive",
+        "score": 1.0,
+        "confidence": 0.6,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Oil",
+          "Crude Oil"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "commodities"
+        ],
+        "organizations": [],
+        "topics": [
+          "equities"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.1258,
+        "source_weight": 0.8,
+        "sentiment_strength": 0.6,
+        "topic_importance": 0.7,
+        "temporal_recency": 0.8865,
+        "entity_relevance": 0.6333,
+        "cluster_boost": 1.0
+      },
+      "topic": "equities",
+      "relevance_score": 0.3429
+    },
+    {
+      "article_id": "2891f5481422e9fd",
+      "title": "Is the nightmare scenario for global energy here?",
+      "summary": "The Iran crisis is unfolding in a world in which oil and gas supplies are more diversified than in previous decades",
+      "source": "financial times",
+      "source_url": "https://www.ft.com/content/5a74c0f8-1cf2-4a6b-9339-a098fcbeb100",
+      "published_at": "Fri, 06 Mar 2026 18:23:27 GMT",
+      "collected_at": "2026-03-06T21:47:21.860476+00:00",
+      "sentiment": {
+        "label": "negative",
+        "score": -1.0,
+        "confidence": 0.6,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Oil"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "commodities"
+        ],
+        "organizations": [],
+        "topics": [
+          "general_market"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.0684,
+        "source_weight": 0.95,
+        "sentiment_strength": 0.6,
+        "topic_importance": 0.5,
+        "temporal_recency": 0.675,
+        "entity_relevance": 0.5333,
+        "cluster_boost": 1.0
+      },
+      "topic": "general_market",
+      "relevance_score": 0.2429
+    },
+    {
+      "article_id": "1fd3dd6a0ce97f87",
+      "title": "Fed Governor Miran says job losses in February add to the case for more interest rate cuts",
+      "summary": "Miran said in a CNBC interview that the Fed should be focusing more on supporting the labor market than worrying about inflation.",
+      "source": "cnbc",
+      "source_url": "https://www.cnbc.com/2026/03/06/fed-governor-miran-says-job-losses-in-february-add-to-the-case-for-more-interest-rate-cuts.html",
+      "published_at": "Fri, 06 Mar 2026 18:14:50 GMT",
+      "collected_at": "2026-03-06T21:47:21.860476+00:00",
+      "sentiment": {
+        "label": "positive",
+        "score": 1.0,
+        "confidence": 0.6,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Federal Reserve"
+        ],
+        "tickers": [],
+        "asset_classes": [],
+        "organizations": [
+          "Federal Reserve"
+        ],
+        "topics": [
+          "interest_rates"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.0677,
+        "source_weight": 0.85,
+        "sentiment_strength": 0.6,
+        "topic_importance": 1.0,
+        "temporal_recency": 0.6639,
+        "entity_relevance": 0.3,
+        "cluster_boost": 1.0
+      },
+      "topic": "interest_rates",
+      "relevance_score": 0.3857
+    },
+    {
+      "article_id": "c61ea3ed4871446d",
+      "title": "Bank of England grills lenders over collapsed mortgage provider MFS",
+      "summary": "Barclays among the lenders central bank s PRA is scrutinising amid due diligence concerns",
+      "source": "financial times",
+      "source_url": "https://www.ft.com/content/c9c0131c-32c3-476a-8874-2881084d5b4c",
+      "published_at": "Fri, 06 Mar 2026 15:38:17 GMT",
+      "collected_at": "2026-03-06T21:47:21.873181+00:00",
+      "sentiment": {
+        "label": "negative",
+        "score": -1.0,
+        "confidence": 0.6,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [],
+        "tickers": [],
+        "asset_classes": [],
+        "organizations": [],
+        "topics": [
+          "regulation"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.0355,
+        "source_weight": 0.95,
+        "sentiment_strength": 0.6,
+        "topic_importance": 0.95,
+        "temporal_recency": 0.4912,
+        "entity_relevance": 0.2,
+        "cluster_boost": 1.0
+      },
+      "topic": "regulation",
+      "relevance_score": 0.2857
+    },
+    {
+      "article_id": "b8f3b8f285077a44",
+      "title": "U.S.-Iran war exposes big market concentration risk. It isn't in S&P 500 stocks",
+      "summary": "Oil prices soar in the U.S.-Iran war, leading to volatility in emerging markets, and showing how concentrated EM funds are in Asian economies.",
+      "source": "cnbc",
+      "source_url": "https://www.cnbc.com/2026/03/06/iran-war-oil-energy-emerging-markets-stocks-south-korea.html",
+      "published_at": "Fri, 06 Mar 2026 17:52:33 GMT",
+      "collected_at": "2026-03-06T21:47:21.866582+00:00",
+      "sentiment": {
+        "label": "neutral",
+        "score": 0.0,
+        "confidence": 0.3,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "S&P 500",
+          "Oil"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "commodities",
+          "equities"
+        ],
+        "organizations": [],
+        "topics": [
+          "geopolitical"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.0314,
+        "source_weight": 0.85,
+        "sentiment_strength": 0.0,
+        "topic_importance": 0.9,
+        "temporal_recency": 0.6361,
+        "entity_relevance": 0.9667,
+        "cluster_boost": 1.0
+      },
+      "topic": "geopolitical",
+      "relevance_score": 0.4857
+    },
+    {
+      "article_id": "ae7654a89b032a2f",
+      "title": "Gilts sell off sharply on fears of inflation from Iran war",
+      "summary": "Hopes for Bank of England rate cuts fade as oil and gas prices soar",
+      "source": "financial times",
+      "source_url": "https://www.ft.com/content/8a7d43dd-0af9-44bd-a457-b1b7fe8c415f",
+      "published_at": "Fri, 06 Mar 2026 17:27:01 GMT",
+      "collected_at": "2026-03-06T21:47:21.869172+00:00",
+      "sentiment": {
+        "label": "neutral",
+        "score": 0.0,
+        "confidence": 0.3,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Oil"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "commodities"
+        ],
+        "organizations": [],
+        "topics": [
+          "interest_rates"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.0205,
+        "source_weight": 0.95,
+        "sentiment_strength": 0.0,
+        "topic_importance": 1.0,
+        "temporal_recency": 0.6055,
+        "entity_relevance": 0.5333,
+        "cluster_boost": 1.0
+      },
+      "topic": "interest_rates",
+      "relevance_score": 0.5286
+    },
+    {
+      "article_id": "0ca0bc36712c1a93",
+      "title": "Only about 8 ships a day are passing through the Strait of Hormuz 94% fewer than usual",
+      "summary": "With the conflict in Iran raging, the number of oil tankers and cargo ships making their way through the strategic waterway has plummeted.",
+      "source": "marketwatch",
+      "source_url": "https://www.marketwatch.com/story/only-about-8-ships-a-day-are-passing-through-the-strait-of-hormuz-94-fewer-than-usual-806837f9?mod=mw_rss_topstories",
+      "published_at": "Fri, 06 Mar 2026 19:40:00 GMT",
+      "collected_at": "2026-03-06T21:47:21.860476+00:00",
+      "sentiment": {
+        "label": "neutral",
+        "score": 0.0,
+        "confidence": 0.3,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Oil"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "commodities"
+        ],
+        "organizations": [],
+        "topics": [
+          "geopolitical"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.02,
+        "source_weight": 0.8,
+        "sentiment_strength": 0.0,
+        "topic_importance": 0.9,
+        "temporal_recency": 0.7822,
+        "entity_relevance": 0.5333,
+        "cluster_boost": 1.0
+      },
+      "topic": "geopolitical",
+      "relevance_score": 0.2429
+    },
+    {
+      "article_id": "bff387ee3fdef783",
+      "title": "Investors are not ready for a true shock",
+      "summary": "The consensus view of the impact of the Iran war on equities and bonds may well prove too sanguine",
+      "source": "financial times",
+      "source_url": "https://www.ft.com/content/d1f70afe-61f9-4993-9413-00463a60fe61",
+      "published_at": "Fri, 06 Mar 2026 18:00:07 GMT",
+      "collected_at": "2026-03-06T21:47:21.864928+00:00",
+      "sentiment": {
+        "label": "neutral",
+        "score": 0.0,
+        "confidence": 0.3,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Bonds"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "bonds"
+        ],
+        "organizations": [],
+        "topics": [
+          "geopolitical"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.0196,
+        "source_weight": 0.95,
+        "sentiment_strength": 0.0,
+        "topic_importance": 0.9,
+        "temporal_recency": 0.6454,
+        "entity_relevance": 0.5333,
+        "cluster_boost": 1.0
+      },
+      "topic": "geopolitical",
+      "relevance_score": 0.2429
+    },
+    {
+      "article_id": "509b32960e073639",
+      "title": "Global bonds suffer one of worst routs in years",
+      "summary": "Debt markets head for worst week in more than a year after energy price surge sparks inflation fears",
+      "source": "financial times",
+      "source_url": "https://www.ft.com/content/d0b40a4d-9cd8-4904-8c0a-ea14326341b7",
+      "published_at": "Fri, 06 Mar 2026 17:17:49 GMT",
+      "collected_at": "2026-03-06T21:47:21.869172+00:00",
+      "sentiment": {
+        "label": "neutral",
+        "score": 0.0,
+        "confidence": 0.3,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Bonds"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "bonds"
+        ],
+        "organizations": [],
+        "topics": [
+          "inflation"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.0181,
+        "source_weight": 0.95,
+        "sentiment_strength": 0.0,
+        "topic_importance": 0.9,
+        "temporal_recency": 0.5949,
+        "entity_relevance": 0.5333,
+        "cluster_boost": 1.0
+      },
+      "topic": "inflation",
+      "relevance_score": 0.3857
+    },
+    {
+      "article_id": "492f9daa25d9d086",
+      "title": "Susquehanna-backed crypto firm BlockFills prepares for restructuring",
+      "summary": "Company has been sued by one customer and told potential investors it suffered from accounting failures",
+      "source": "financial times",
+      "source_url": "https://www.ft.com/content/15f28a6b-0182-4cb9-9d6b-ebccf4914c79",
+      "published_at": "Fri, 06 Mar 2026 17:37:58 GMT",
+      "collected_at": "2026-03-06T21:47:21.866582+00:00",
+      "sentiment": {
+        "label": "neutral",
+        "score": 0.0,
+        "confidence": 0.3,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Crypto"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "crypto"
+        ],
+        "organizations": [],
+        "topics": [
+          "crypto"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.0157,
+        "source_weight": 0.95,
+        "sentiment_strength": 0.0,
+        "topic_importance": 0.75,
+        "temporal_recency": 0.6184,
+        "entity_relevance": 0.5333,
+        "cluster_boost": 1.0
+      },
+      "topic": "crypto",
+      "relevance_score": 0.2429
+    },
+    {
+      "article_id": "7265a7c63bb8338e",
+      "title": "S&P 500 changes are due out soon. These AI stocks could join the index.",
+      "summary": "Lumentum and Coherent have market caps of more than $40 billion, well above the threshold for S&amp;P 500 inclusion.",
+      "source": "marketwatch",
+      "source_url": "https://www.marketwatch.com/story/s-p-500-changes-are-due-out-soon-these-ai-stocks-could-join-the-index-ded9e245?mod=mw_rss_topstories",
+      "published_at": "Fri, 06 Mar 2026 19:40:00 GMT",
+      "collected_at": "2026-03-06T21:47:21.859363+00:00",
+      "sentiment": {
+        "label": "neutral",
+        "score": 0.0,
+        "confidence": 0.3,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "S&P 500"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "equities"
+        ],
+        "organizations": [],
+        "topics": [
+          "equities"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.0156,
+        "source_weight": 0.8,
+        "sentiment_strength": 0.0,
+        "topic_importance": 0.7,
+        "temporal_recency": 0.7822,
+        "entity_relevance": 0.5333,
+        "cluster_boost": 1.0
+      },
+      "topic": "equities",
+      "relevance_score": 0.2429
+    },
+    {
+      "article_id": "c1958a5c994df71b",
+      "title": "The oil shock won t matter much, unless it does",
+      "summary": "Your end-of-week research wrap",
+      "source": "financial times",
+      "source_url": "https://www.ft.com/content/4a4f6bd7-ebfd-4bff-86c5-48826d46fa4e",
+      "published_at": "Fri, 06 Mar 2026 17:00:48 GMT",
+      "collected_at": "2026-03-06T21:47:21.871647+00:00",
+      "sentiment": {
+        "label": "neutral",
+        "score": 0.0,
+        "confidence": 0.3,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Oil"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "commodities"
+        ],
+        "organizations": [],
+        "topics": [
+          "general_market"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.0097,
+        "source_weight": 0.95,
+        "sentiment_strength": 0.0,
+        "topic_importance": 0.5,
+        "temporal_recency": 0.5757,
+        "entity_relevance": 0.5333,
+        "cluster_boost": 1.0
+      },
+      "topic": "general_market",
+      "relevance_score": 0.2429
+    },
+    {
+      "article_id": "fc556aa69ac15876",
+      "title": "Bitcoin Price Still Risks Decline If Iran War Mirrors Ukraine War Market Reaction, JPMorgan Warns",
+      "summary": "",
+      "source": "yahoo finance",
+      "source_url": "https://finance.yahoo.com/news/bitcoin-price-still-risks-decline-141216438.html",
+      "published_at": "2026-03-05T14:12:16Z",
+      "collected_at": "2026-03-06T21:47:21.954048+00:00",
+      "sentiment": {
+        "label": "negative",
+        "score": -1.0,
+        "confidence": 0.6,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Bitcoin",
+          "JPMorgan"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "crypto"
+        ],
+        "organizations": [
+          "JPMorgan"
+        ],
+        "topics": [
+          "geopolitical"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.0091,
+        "source_weight": 0.8,
+        "sentiment_strength": 0.6,
+        "topic_importance": 0.9,
+        "temporal_recency": 0.05,
+        "entity_relevance": 0.6333,
+        "cluster_boost": 1.0
+      },
+      "topic": "geopolitical",
+      "relevance_score": 0.3429
+    },
+    {
+      "article_id": "8b7b8803e8f3750b",
+      "title": "The Gulf bonds that aren t barking",
+      "summary": "Safe haven status: under fire everywhere but credit markets",
+      "source": "financial times",
+      "source_url": "https://www.ft.com/content/24da6b06-1793-4aa3-91cb-e0e54c99b417",
+      "published_at": "Fri, 06 Mar 2026 15:39:09 GMT",
+      "collected_at": "2026-03-06T21:47:21.872119+00:00",
+      "sentiment": {
+        "label": "neutral",
+        "score": 0.0,
+        "confidence": 0.3,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Bonds"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "bonds"
+        ],
+        "organizations": [],
+        "topics": [
+          "general_market"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.0083,
+        "source_weight": 0.95,
+        "sentiment_strength": 0.0,
+        "topic_importance": 0.5,
+        "temporal_recency": 0.492,
+        "entity_relevance": 0.5333,
+        "cluster_boost": 1.0
+      },
+      "topic": "general_market",
+      "relevance_score": 0.2429
+    },
+    {
+      "article_id": "8deda2f48821f81d",
+      "title": "Ether s path to $2.5K may be trickier than expected: Here s why",
+      "summary": "Crypto markets spent the week chasing green, but Ether s rally toward $2,500 might hit significant setbacks. Cointelegraph explains why.",
+      "source": "cointelegraph",
+      "source_url": "https://cointelegraph.com/news/ether-s-path-to-2-5k-may-be-trickier-than-expected-here-s-why",
+      "published_at": "2026-03-05T21:45:27Z",
+      "collected_at": "2026-03-06T21:47:21.900188+00:00",
+      "sentiment": {
+        "label": "positive",
+        "score": 1.0,
+        "confidence": 0.6,
+        "model_source": "rule_based",
+        "finbert_score": null,
+        "llm_score": null,
+        "agreement": true
+      },
+      "entities": {
+        "entities": [
+          "Crypto"
+        ],
+        "tickers": [],
+        "asset_classes": [
+          "crypto"
+        ],
+        "organizations": [],
+        "topics": [
+          "crypto"
+        ]
+      },
+      "impact": {
+        "impact_score": 0.007,
+        "source_weight": 0.7,
+        "sentiment_strength": 0.6,
+        "topic_importance": 0.75,
+        "temporal_recency": 0.0622,
+        "entity_relevance": 0.5333,
+        "cluster_boost": 1.0
+      },
+      "topic": "crypto",
+      "relevance_score": 0.2429
+    }
+  ],
+  "article_count": 29,
+  "temporal_sentiment": {
+    "overall_1h": 1.0,
+    "overall_6h": 0.5365,
+    "overall_24h": 0.5077,
+    "overall_3d": 0.507,
+    "overall_7d": 0.507,
+    "crypto_sentiment": {
+      "1h": 0.0,
+      "6h": 0.0,
+      "24h": 0.0,
+      "3d": 0.0998,
+      "7d": 0.0998
+    },
+    "equities_sentiment": {
+      "1h": 1.0,
+      "6h": 0.9206,
+      "24h": 0.9206,
+      "3d": 0.9179,
+      "7d": 0.9179
+    },
+    "bonds_sentiment": {
+      "1h": 0.0,
+      "6h": 0.8993,
+      "24h": 0.8838,
+      "3d": 0.8838,
+      "7d": 0.8838
+    },
+    "commodities_sentiment": {
+      "1h": 1.0,
+      "6h": 0.5268,
+      "24h": 0.5263,
+      "3d": 0.5261,
+      "7d": 0.5261
+    },
+    "sentiment_momentum": "accelerating_bullish",
+    "momentum_strength": 0.493,
+    "regime_sentiment": "very_bullish"
+  },
+  "event_detection": {
+    "events_detected": [
+      {
+        "type": "geopolitical",
+        "severity": "black_swan",
+        "description": "Geopolitical crisis or conflict",
+        "trigger_article": "Oil hits highest level since 2023 as Iran war triggers historic surge",
+        "trigger_source": "financial times",
+        "keywords_matched": [
+          "war"
+        ],
+        "sentiment_context": "positive",
+        "affected_assets": [
+          "equities",
+          "commodities",
+          "forex",
+          "bonds",
+          "crypto"
+        ],
+        "impact_direction": {
+          "equities": "high",
+          "commodities": "high",
+          "forex": "high",
+          "bonds": "moderate",
+          "crypto": "moderate"
+        },
+        "recommended_action": "hedge",
+        "detected_at": "2026-03-06T21:47:33.165069+00:00"
+      },
+      {
+        "type": "macro_shock",
+        "severity": "black_swan",
+        "description": "Macroeconomic disruption",
+        "trigger_article": "Stagflation? $150 oil? Not all 401(k)s are losing money.",
+        "trigger_source": "marketwatch",
+        "keywords_matched": [
+          "stagflation"
+        ],
+        "sentiment_context": "positive",
+        "affected_assets": [
+          "equities",
+          "bonds",
+          "commodities",
+          "crypto",
+          "forex"
+        ],
+        "impact_direction": {
+          "equities": "high",
+          "bonds": "high",
+          "commodities": "moderate",
+          "crypto": "moderate",
+          "forex": "moderate"
+        },
+        "recommended_action": "derisk",
+        "detected_at": "2026-03-06T21:47:33.165069+00:00"
+      },
+      {
+        "type": "black_swan",
+        "severity": "black_swan",
+        "description": "Potential black swan / market crisis event",
+        "trigger_article": "Is the nightmare scenario for global energy here?",
+        "trigger_source": "financial times",
+        "keywords_matched": [
+          "crisis"
+        ],
+        "sentiment_context": "negative",
+        "affected_assets": [
+          "equities",
+          "crypto",
+          "bonds",
+          "commodities",
+          "forex"
+        ],
+        "impact_direction": {
+          "equities": "extreme",
+          "crypto": "extreme",
+          "bonds": "high",
+          "commodities": "high",
+          "forex": "high"
+        },
+        "recommended_action": "derisk",
+        "detected_at": "2026-03-06T21:47:33.165069+00:00"
+      },
+      {
+        "type": "regulation",
+        "severity": "critical",
+        "description": "Regulatory or enforcement action",
+        "trigger_article": "Bank of England grills lenders over collapsed mortgage provider MFS",
+        "trigger_source": "financial times",
+        "keywords_matched": [
+          "ban"
+        ],
+        "sentiment_context": "negative",
+        "affected_assets": [
+          "crypto",
+          "equities"
+        ],
+        "impact_direction": {
+          "crypto": "high",
+          "equities": "moderate"
+        },
+        "recommended_action": "review",
+        "detected_at": "2026-03-06T21:47:33.165069+00:00"
+      },
+      {
+        "type": "fed_meeting",
+        "severity": "critical",
+        "description": "Federal Reserve / FOMC policy event",
+        "trigger_article": "Crypto Has Been Renting Access to the Financial System. Kraken Just Bought In.",
+        "trigger_source": "observer",
+        "keywords_matched": [
+          "federal reserve"
+        ],
+        "sentiment_context": "positive",
+        "affected_assets": [
+          "bonds",
+          "equities",
+          "crypto",
+          "forex",
+          "commodities"
+        ],
+        "impact_direction": {
+          "bonds": "high",
+          "equities": "high",
+          "crypto": "moderate",
+          "forex": "high",
+          "commodities": "moderate"
+        },
+        "recommended_action": "review",
+        "detected_at": "2026-03-06T21:47:33.167179+00:00"
+      }
+    ],
+    "has_critical_event": true,
+    "highest_severity": "black_swan",
+    "event_count": 5,
+    "risk_alert": "\u26a0\ufe0f 5 market event(s) detected (highest: black_swan):\n  \u26d4 [BLACK_SWAN] Geopolitical crisis or conflict: Oil hits highest level since 2023 as Iran war triggers historic surge...\n  \u26d4 [BLACK_SWAN] Macroeconomic disruption: Stagflation? $150 oil? Not all 401(k)s are losing money....\n  \u26d4 [BLACK_SWAN] Potential black swan / market crisis event: Is the nightmare scenario for global energy here?...\n  \ud83d\udd34 [CRITICAL] Regulatory or enforcement action: Bank of England grills lenders over collapsed mortgage provider MFS...\n  \ud83d\udd34 [CRITICAL] Federal Reserve / FOMC policy event: Crypto Has Been Renting Access to the Financial System. Kraken Just Bought In....",
+    "recommended_action": "derisk"
+  },
+  "market_signal": {
+    "signal_type": "bearish",
+    "confidence": 0.5,
+    "affected_assets": [
+      "commodities",
+      "bonds",
+      "equities",
+      "forex",
+      "crypto"
+    ],
+    "signal_strength": "moderate",
+    "primary_driver": "geopolitical",
+    "recommended_bias": {
+      "crypto": 0.0,
+      "equities": 0.15,
+      "bonds": 0.0,
+      "commodities": 0.15,
+      "forex": 0.0
+    },
+    "narrative": "News sentiment analysis based on 15 financial articles indicates a very_bullish market sentiment regime with accelerating_bullish momentum. 5 market event(s) detected at black_swan severity level. Recommended action: derisk. Key headlines: \"Oil prices are surging. Will that help Tesla and others sell\", \"Gold prices post worst week since January. The dollar gets p\", \"Oil hits highest level since 2023 as Iran war triggers histo\".",
+    "risk_events": [
+      "Geopolitical crisis or conflict",
+      "Macroeconomic disruption",
+      "Potential black swan / market crisis event",
+      "Regulatory or enforcement action",
+      "Federal Reserve / FOMC policy event"
+    ]
+  },
+  "llm_analysis": {
+    "market_narrative": "News sentiment analysis based on 15 financial articles indicates a very_bullish market sentiment regime with accelerating_bullish momentum. 5 market event(s) detected at black_swan severity level. Recommended action: derisk. Key headlines: \"Oil prices are surging. Will that help Tesla and others sell\", \"Gold prices post worst week since January. The dollar gets p\", \"Oil hits highest level since 2023 as Iran war triggers histo\".",
+    "key_themes": [
+      "geopolitical",
+      "commodities",
+      "general_market",
+      "interest_rates",
+      "equities"
+    ],
+    "risk_assessment": "\u26a0\ufe0f 5 market event(s) detected (highest: black_swan):\n  \u26d4 [BLACK_SWAN] Geopolitical crisis or conflict: Oil hits highest level since 2023 as Iran war triggers historic surge...\n  \u26d4 [BLACK_SWAN] Macroeconomic disruption: Stagflation? $150 oil? Not all 401(k)s are losing money....\n  \u26d4 [BLACK_SWAN] Potential black swan / market crisis event: Is the nightmare scenario for global energy here?...\n  \ud83d\udd34 [CRITICAL] Regulatory or enforcement action: Bank of England grills lenders over collapsed mortgage provider MFS...\n  \ud83d\udd34 [CRITICAL] Federal Reserve / FOMC policy event: Crypto Has Been Renting Access to the Financial System. Kraken Just Bought In....",
+    "allocation_implications": "",
+    "confidence_level": 0.4,
+    "contrarian_signals": []
+  },
+  "agent_metadata": {
+    "agent_id": "agent5_news_intelligence",
+    "version": "1.0.0",
+    "execution_time_ms": 23763,
+    "timestamp": "2026-03-06T21:47:36.592632+00:00Z",
+    "articles_collected": 111,
+    "articles_processed": 29,
+    "sources_queried": [
+      "reuters_markets",
+      "cnbc_finance",
+      "ft_markets",
+      "yahoo_finance",
+      "marketwatch",
+      "investing_com",
+      "newsapi_headlines",
+      "newsapi_search"
+    ],
+    "sources_failed": [
+      "gdelt",
+      "cryptopanic"
+    ],
+    "models_used": [
+      "news_collector_v1",
+      "news_processor_v1",
+      "llm_core_model",
+      "rule_based_sentiment",
+      "impact_scorer_v1",
+      "event_detector_v1",
+      "temporal_aggregator_v1"
+    ],
+    "data_quality": "full",
+    "execution_log": [
+      {
+        "step": "collection",
+        "status": "success",
+        "duration_ms": 8987,
+        "timestamp": "2026-03-06T21:47:21.816885+00:00Z",
+        "details": {
+          "articles_raw": 100,
+          "sources_queried": [
+            "reuters_markets",
+            "cnbc_finance",
+            "ft_markets",
+            "yahoo_finance",
+            "marketwatch",
+            "investing_com",
+            "newsapi_headlines",
+            "newsapi_search"
+          ],
+          "sources_failed": [
+            "gdelt",
+            "cryptopanic"
+          ]
+        }
+      },
+      {
+        "step": "processing",
+        "status": "success",
+        "duration_ms": 170,
+        "timestamp": "2026-03-06T21:47:21.986407+00:00Z",
+        "details": {
+          "input": 100,
+          "output": 29,
+          "filtered": 71
+        }
+      },
+      {
+        "step": "embedding",
+        "status": "success",
+        "duration_ms": 54,
+        "timestamp": "2026-03-06T21:47:22.040887+00:00Z",
+        "details": {
+          "articles_embedded": 29
+        }
+      },
+      {
+        "step": "deduplication",
+        "status": "success",
+        "duration_ms": 63,
+        "timestamp": "2026-03-06T21:47:22.104347+00:00Z",
+        "details": {
+          "before": 29,
+          "after": 29,
+          "removed": 0
+        }
+      },
+      {
+        "step": "clustering",
+        "status": "success",
+        "duration_ms": 66,
+        "timestamp": "2026-03-06T21:47:22.171121+00:00Z",
+        "details": {
+          "articles": 29,
+          "clusters": 29
+        }
+      },
+      {
+        "step": "sentiment_analysis",
+        "status": "success",
+        "duration_ms": 10979,
+        "timestamp": "2026-03-06T21:47:33.150948+00:00Z",
+        "details": {
+          "analyzed": 29,
+          "finbert_used": 0,
+          "llm_used": 0,
+          "fallback_used": 29,
+          "agreements": 0
+        }
+      },
+      {
+        "step": "impact_scoring",
+        "status": "success",
+        "duration_ms": 6,
+        "timestamp": "2026-03-06T21:47:33.165069+00:00Z",
+        "details": {
+          "scored": 29,
+          "high_impact": 0,
+          "medium_impact": 0,
+          "low_impact": 29
+        }
+      },
+      {
+        "step": "event_detection",
+        "status": "success",
+        "duration_ms": 3,
+        "timestamp": "2026-03-06T21:47:33.167900+00:00Z",
+        "details": {
+          "events_detected": 5,
+          "highest_severity": "black_swan",
+          "has_critical": true
+        }
+      },
+      {
+        "step": "temporal_aggregation",
+        "status": "success",
+        "duration_ms": 85,
+        "timestamp": "2026-03-06T21:47:33.253818+00:00Z",
+        "details": {
+          "regime": "very_bullish",
+          "momentum": "accelerating_bullish",
+          "1h": 1.0,
+          "24h": 0.5077,
+          "7d": 0.507
+        }
+      },
+      {
+        "step": "market_signal_synthesis",
+        "status": "success",
+        "duration_ms": 3338,
+        "timestamp": "2026-03-06T21:47:36.591871+00:00Z",
+        "details": {
+          "signal_type": "bearish",
+          "confidence": 0.5,
+          "llm_calls": 1
+        }
+      }
+    ]
+  }
+}

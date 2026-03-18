@@ -1,0 +1,273 @@
+# Agent 4 — Meta-Risk & Supervision Agent: Walkthrough
+
+## What Was Built
+
+The **Chief Risk Officer** of the pipeline — an independent auditor that scrutinizes Agent 3's allocation against market context and investor profile before it reaches the client. This is the "game changer" component that makes this a monster-level system.
+
+### Architecture
+
+```mermaid
+graph TD
+    A1["Agent 1 Output<br/>(Regime, Vol, Risk)"] --> AUDIT["5 Independent<br/>Risk Audits"]
+    A2["Agent 2 Output<br/>(Risk Score, Profile)"] --> AUDIT
+    A3["Agent 3 Output<br/>(Proposed Allocation)"] --> AUDIT
+    
+    AUDIT --> |Pass/Warn/Fail| ADJ["Allocation Adjuster<br/>(Rebalancer)"]
+    AUDIT --> |Findings| CRO["LLM Chief Risk Officer<br/>(Adjudicator)"]
+    ADJ --> |Adjusted Weights| CRO
+    
+    CRO --> |APPROVED| OUT1["✓ Pass Through"]
+    CRO --> |ADJUSTED| OUT2["⚠ Modified Allocation"]
+    CRO --> |REJECTED| OUT3["✗ Must Reconstruct"]
+```
+
+### 5 Independent Risk Audits
+
+| Audit | What It Checks | Key Metrics |
+|-------|---------------|-------------|
+| **Regime Consistency** | Allocation vs market regime rules | Per-regime equity/crypto caps, defensive floors |
+| **Profile Alignment** | Allocation vs investor risk score/type | Behavioral type limits, liquidity requirements |
+| **Drawdown Guardrails** | MC simulation vs investor tolerance | Median DD, P(loss), CVaR95, VaR95 |
+| **Concentration** | Portfolio diversification adequacy | HHI index, risk contribution dominance |
+| **Cross-Agent Coherence** | Contradictions between Agents 1/2/3 | Regime-strategy mismatch, consistency flags |
+
+### Files Created (6 new, 1 modified)
+
+| File | Purpose |
+|------|---------|
+| [agent4_output.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/schemas/agent4_output.py) | Pydantic schemas (audit results, adjusted allocation, CRO verdict) |
+| [risk_auditor.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/risk_auditor.py) | 5 independent audit submodules with regime-specific rules |
+| [allocation_adjuster.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/allocation_adjuster.py) | Regime-aware rebalancer with cap/floor constraints |
+| [risk_adjudicator.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/llm/risk_adjudicator.py) | LLM CRO adjudicator with skeptical prompt + rule-based fallback |
+| [agent4_supervisor.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent4_supervisor.py) | Pipeline orchestrator with audit → adjust → verdict flow |
+| [test_agent4.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/tests/test_agent4.py) | 26 comprehensive tests |
+| [main.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/main.py) | Added `--agent 4` and `--agent3-json` CLI support |
+
+## Verification Results
+
+### Tests: 26/26 Passing
+
+```text
+TestRegimeConsistency      (3 tests) -- PASSED
+TestProfileAlignment       (3 tests) -- PASSED
+TestDrawdownGuardrails     (2 tests) -- PASSED
+TestConcentration          (3 tests) -- PASSED
+TestCrossAgentCoherence    (3 tests) -- PASSED
+TestAllocationAdjuster     (3 tests) -- PASSED
+TestSchemas                (2 tests) -- PASSED
+TestAgent4Pipeline         (7 tests) -- PASSED
+================== 26 passed, 1 warning in 90.73s ===================
+```
+
+### Live Pipeline Result (Agent 4 with real upstream data)
+
+Agent 4 correctly **REJECTED** Agent 3's proposed allocation:
+
+| Audit | Verdict | Severity | Finding |
+|-------|---------|----------|---------|
+| Regime Consistency | **FAIL** | 0.72 | Equity (44%) exceeds bear regime limit (40%); Crypto (12%) exceeds limit (8%) |
+| Cross-Agent Coherence | **FAIL** | 0.70 | Bear regime + growth strategy = directional mismatch |
+| Concentration | WARNING | 0.20 | HHI 0.287 (moderate concentration) |
+| Profile Alignment | PASS | 0.00 | — |
+| Drawdown Guardrails | PASS | 0.00 | — |
+
+**Adjusted Allocation** (safety rebalance):
+
+| Asset | Original | Adjusted | Change |
+|-------|----------|----------|--------|
+| SPY | 44% | **30%** | -14% |
+| BND | 11% | **23%** | +12% |
+| GLD | 25% | **26%** | +1% |
+| BTC | 12% | **4%** | -8% |
+| CASH | 8% | **17%** | +9% |
+
+## How to Run
+
+```bash
+# Mock mode (intentionally bad allocation → tests all audits)
+python main.py --agent 4 --mock
+
+# Full 4-agent live pipeline
+python main.py --agent 4 --agent1-json live_output.json --agent2-json agent2_live_output.json --agent3-json agent3_live_output.json
+
+# Run tests
+pytest tests/test_agent4.py -v
+```
+
+---
+
+# Agent 3 -- Quantitative Portfolio Strategist: Walkthrough
+
+## What Was Built
+
+A comprehensive quantitative portfolio strategist that leverages Agent 1 (Market Context) and Agent 2 (Investor Profile) to produce an optimal constrained allocation, stress-tested with 10,000 Monte Carlo scenarios, and explained via an institutional-quality LLM narrative.
+
+### Architecture
+
+```mermaid
+graph TD
+    A1["Agent 1 Output<br/>(Regime, Vol, Risk)"] --> AU["Asset Universe Manager<br/>(Returns, Covariance)"]
+    A2["Agent 2 Output<br/>(Risk Score, Max DD)"] --> AU
+    
+    AU --> |Expected Returns,<br/>Covariance, Bounds| PO["Portfolio Optimizer"]
+    PO --> |Mean-Variance| STRAT["Strategy Selector"]
+    PO --> |Risk Parity| STRAT
+    PO --> |CVaR-Constrained| STRAT
+    
+    STRAT --> |Optimal Weights| MC["Monte Carlo Simulator<br/>(10,000 Scenarios)"]
+    STRAT --> |Risk Decomp| METRICS["Portfolio Metrics"]
+    
+    MC --> |VaR, CVaR, P(Loss),<br/>Percentiles| OUT["Final Allocation Data"]
+    METRICS --> OUT
+    
+    OUT --> EXPL["Allocation Explainer<br/>(LLM Layer)"]
+    EXPL --> FINAL["Agent 3 JSON Output"]
+```
+
+### Key Capabilities
+
+| Feature | Detail |
+|---------|--------|
+| **Multi-Strategy Optimization** | Mean-Variance (Markowitz), Risk Parity (Equal Risk Contribution), CVaR-Constrained. |
+| **Profile-Based Selection** | Automatically shifts strategy based on investor profile (`defensive`, `defensive_growth`, [balanced](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/tests/test_agent4.py#190-194), [growth](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/data/macro_data.py#280-321), `aggressive_growth`, `max_growth`). |
+| **Monte Carlo Simulation** | Correlated Geometric Brownian Motion across 10,000 paths (252 forward days), tracking max drawdowns per path. |
+| **Institutional Explanations** | Translates complex quant output into professional rationale with explicit trade-offs and guardrails via Gemini. |
+
+### Files Created (6 new, 1 modified)
+
+| File | Purpose |
+|------|---------|
+| [agent3_output.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/schemas/agent3_output.py) | Pydantic schemas (Allocation, Metrics, MC, Explanations, etc) |
+| [asset_universe.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/asset_universe.py) | 5-asset manager with regime-adjusted returns and stress-aware covariance |
+| [portfolio_optimizer.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/portfolio_optimizer.py) | Scipy constrained SLSQP optimization across 3 strat types + blending |
+| [monte_carlo.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/monte_carlo.py) | 10K-scenario GBM simulator |
+| [allocation_explainer.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/llm/allocation_explainer.py) | LLM narrative generation with quant-only fallback |
+| [agent3_strategist.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent3_strategist.py) | Pipeline orchestrator with full logging |
+| [test_agent3.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/tests/test_agent3.py) | 27 unit and integration tests |
+| [main.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/main.py) | Added `--agent 3` support with `--agent1-json` and `--agent2-json` integration |
+
+## Verification Results
+
+### Tests: 27/27 Passing
+
+```text
+TestAssetUniverse          (6 tests) -- PASSED
+TestPortfolioOptimizer     (8 tests) -- PASSED
+TestMonteCarlo             (3 tests) -- PASSED
+TestSchemas                (2 tests) -- PASSED
+TestAgent3Pipeline         (8 tests) -- PASSED
+================== 27 passed, 12 warnings in 3.19s ===================
+```
+
+### Mock Pipeline Output (key results for a "Growth" profile)
+
+| Metric | Result |
+|-----------|--------|
+| **Strategy Selected** | [growth](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/data/macro_data.py#280-321) (Blended Mean-Variance & Risk Parity) |
+| **Expected Return** | ~8.0% |
+| **Portfolio Volatility** | ~14.0% |
+| **Sharpe Ratio** | 0.31 |
+| **Max Drawdown Estimate** | 11.5% |
+| **P(Loss) over 1 Year** | 31% |
+| **CVaR (95%)** | 22.4% |
+
+## How to Run
+
+```bash
+# Mock mode (isolated test with synthetic data)
+python main.py --agent 3 --mock
+
+# Live pipeline (uses saved Agent 1 and Agent 2 outputs)
+python main.py --agent 3 --agent1-json live_output.json --agent2-json agent2_live_output.json
+
+# Run test suite
+pytest tests/test_agent3.py -v
+```
+
+---
+
+# Agent 2 -- Cognitive & Behavioral Profiling Agent: Walkthrough
+
+## What Was Built
+
+A masterpiece-level Behavioral Finance Intelligence Agent that dynamically profiles investors through adaptive, scenario-based questioning calibrated to real market conditions from Agent 1.
+
+### Architecture
+
+```mermaid
+graph TD
+    A1["Agent 1 Output<br/>(Regime, Vol, Risk)"] --> QC["Question Calibrator<br/>(ML)"]
+    QC --> |stress_multiplier,<br/>categories| QG["Question Generator<br/>(LLM + Fallback Bank)"]
+    QG --> Q["4 Adaptive Questions"]
+    Q --> UA["User Answers"]
+    UA --> BCA["Behavioral Consistency<br/>Analyzer (ML)"]
+    UA --> RC["Adaptive Risk<br/>Classifier (ML)"]
+    BCA --> |contradictions,<br/>biases, stability| OUT
+    RC --> |risk_score,<br/>behavioral_type| OUT
+    OUT --> LLM["LLM Narrative<br/>(Gemini)"]
+    LLM --> FINAL["Agent 2 JSON Output"]
+    FINAL --> A3["Agent 3 Input"]
+```
+
+### Key Capabilities
+
+| Feature | Detail |
+|---------|--------|
+| **10 Behavioral Biases** | loss_aversion, herd_behavior, anchoring, time_pressure, regret_aversion, overconfidence, recency_bias, disposition_effect, mental_accounting, sunk_cost |
+| **8 Behavioral Types** | conservative_stable/anxious, moderate_balanced/volatile, growth_seeker (+vol sensitivity), aggressive_speculator/contrarian |
+| **4 Stress Responses** | fight, flight, freeze, adapt |
+| **3 Contradiction Types** | cross_question, stress_induced, anchoring |
+| **Market-Adjusted Scoring** | Risk score modified by regime, vol, stability, stress response |
+
+### Files Created (7 new + 1 modified)
+
+| File | Purpose |
+|------|---------|
+| [agent2_output.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/schemas/agent2_output.py) | Pydantic schemas (2 phases) |
+| [question_engine.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/question_engine.py) | Stress calibration + category selection |
+| [behavioral_analyzer.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/behavioral_analyzer.py) | Contradiction & bias detection |
+| [risk_classifier.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/risk_classifier.py) | Continuous 0-1 risk scoring |
+| [question_generator.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/llm/question_generator.py) | LLM generation + 8-question fallback bank |
+| [agent2_daq.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent2_daq.py) | Orchestrator with mock mode |
+| [test_agent2.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/tests/test_agent2.py) | 23 tests |
+| [main.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/main.py) | Added `--agent 2` support |
+
+## Verification Results
+
+### Tests: 23/23 Passing
+
+```text
+TestQuestionCalibrator     (5 tests) -- PASSED
+TestBehavioralAnalyzer     (4 tests) -- PASSED
+TestRiskClassifier         (5 tests) -- PASSED
+TestSchemas                (3 tests) -- PASSED
+TestQuestionGenerator      (1 test)  -- PASSED
+TestAgent2Pipeline         (5 tests) -- PASSED
+================== 23 passed in 119.81s ===================
+```
+
+### Mock Pipeline Output (key results)
+
+| Dimension | Result |
+|-----------|--------|
+| **Risk Score** | 0.37 (moderate) |
+| **Behavioral Type** | `moderate_volatile` |
+| **Consistency** | 0.07 (contradictions detected) |
+| **Emotional Stability** | [moderate](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/tests/test_agent4.py#72-87) (score: 0.58) |
+| **Stress Response** | `adapt` |
+| **Decision Speed** | [moderate](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/tests/test_agent4.py#72-87) |
+| **Contradictions** | 2 cross-question flags |
+| **Biases Detected** | recency_bias (strength: 0.87) |
+
+## How to Run
+
+```bash
+# Mock mode (no API keys needed)
+python main.py --agent 2 --mock --output agent2_output.json
+
+# With Agent 1 live context
+python main.py --agent 2 --agent1-json live_output.json
+
+# Run tests
+pytest tests/test_agent2.py -v
+```

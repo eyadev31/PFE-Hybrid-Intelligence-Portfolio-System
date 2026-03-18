@@ -1,0 +1,16 @@
+{
+    "name": "Hybrid Intelligence Portfolio",
+    "short_name": "Portfolio AI",
+    "description": "AI-powered portfolio management with market adaptability",
+    "start_url": "/dashboard",
+    "display": "standalone",
+    "background_color": "#0f111a",
+    "theme_color": "#0f111a",
+    "icons": [
+        {
+            "src": "/favicon.ico",
+            "sizes": "64x64",
+            "type": "image/x-icon"
+        }
+    ]
+}

@@ -1,0 +1,290 @@
+{
+  "phase1_questions": {
+    "session_id": "daq_20260227_114850_791b74",
+    "timestamp": "2026-02-27T11:48:55.476960Z",
+    "questions": [
+      {
+        "question_id": "q_791b74_1",
+        "category": "regret_aversion",
+        "difficulty": 0.69,
+        "scenario": "You invested $100,000 in a diversified portfolio 6 months ago, and it has since dropped by 12% due to the bearish market regime. The Fed has just announced an aggressive easing, aiming to stimulate the economy. Your portfolio is now worth $88,000.",
+        "question_text": "What action do you take regarding your investment strategy?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Do nothing and wait for the market to recover, hoping to avoid further losses",
+            "risk_signal": 0.2,
+            "behavioral_tag": "regret_aversion"
+          },
+          {
+            "id": "B",
+            "text": "Rebalance your portfolio to its original asset allocation, taking advantage of lower prices",
+            "risk_signal": 0.5,
+            "behavioral_tag": "disciplined_investor"
+          },
+          {
+            "id": "C",
+            "text": "Sell a portion of your portfolio and move to bonds, fearing further market declines",
+            "risk_signal": 0.3,
+            "behavioral_tag": "cautious_investor"
+          },
+          {
+            "id": "D",
+            "text": "Invest an additional $20,000, trying to time the market bottom",
+            "risk_signal": 0.8,
+            "behavioral_tag": "aggressive_investor"
+          }
+        ],
+        "market_context_used": "Bearish market regime with aggressive easing",
+        "behavioral_insight": "Tests regret aversion: whether user takes action to avoid potential future losses"
+      },
+      {
+        "question_id": "q_791b74_2",
+        "category": "overconfidence",
+        "difficulty": 0.68,
+        "scenario": "The S&P 500 has experienced a 15% drawdown over the past quarter, and you believe it's due for a rebound. You have $50,000 in cash and are considering investing it. The current Fed rate is 3.64%, and unemployment is at 4.3%.",
+        "question_text": "How do you invest the $50,000?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Invest the entire $50,000 in a single stock that you're confident will outperform the market",
+            "risk_signal": 0.95,
+            "behavioral_tag": "overconfidence"
+          },
+          {
+            "id": "B",
+            "text": "Diversify the $50,000 across 5 different stocks, trying to minimize risk",
+            "risk_signal": 0.6,
+            "behavioral_tag": "diversified_investor"
+          },
+          {
+            "id": "C",
+            "text": "Put the $50,000 into a high-yield savings account, earning a 3.5% interest rate",
+            "risk_signal": 0.1,
+            "behavioral_tag": "risk_averse"
+          },
+          {
+            "id": "D",
+            "text": "Invest $20,000 in a mix of stocks and bonds, and keep $30,000 in cash for future opportunities",
+            "risk_signal": 0.4,
+            "behavioral_tag": "cautious_investor"
+          }
+        ],
+        "market_context_used": "S&P 500 drawdown and current Fed rate",
+        "behavioral_insight": "Tests overconfidence: whether user takes excessive risk based on personal market predictions"
+      },
+      {
+        "question_id": "q_791b74_3",
+        "category": "herd_behavior",
+        "difficulty": 0.74,
+        "scenario": "Many of your friends and colleagues are investing in a popular tech stock, citing its potential for high returns. The stock has gained 25% in the past month, and you're considering joining in. The current market regime is bearish, but the stock seems to be defying the trend.",
+        "question_text": "What do you do regarding the tech stock?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Invest $10,000 in the tech stock, following the crowd and hoping to make a quick profit",
+            "risk_signal": 0.85,
+            "behavioral_tag": "herd_behavior"
+          },
+          {
+            "id": "B",
+            "text": "Conduct thorough research on the stock's fundamentals before making a decision",
+            "risk_signal": 0.4,
+            "behavioral_tag": "informed_investor"
+          },
+          {
+            "id": "C",
+            "text": "Avoid investing in the stock, citing concerns about the overall bearish market regime",
+            "risk_signal": 0.2,
+            "behavioral_tag": "cautious_investor"
+          },
+          {
+            "id": "D",
+            "text": "Short the tech stock, betting against its continued success",
+            "risk_signal": 0.9,
+            "behavioral_tag": "contrarian_investor"
+          }
+        ],
+        "market_context_used": "Bearish market regime and popular tech stock",
+        "behavioral_insight": "Tests herd behavior: whether user follows the crowd or makes independent investment decisions"
+      },
+      {
+        "question_id": "q_791b74_4",
+        "category": "loss_aversion",
+        "difficulty": 0.39,
+        "scenario": "Your investment portfolio has a 10% allocation to a specific sector that has dropped by 20% in the past 2 months. The sector is now trading at a 12-month low, and you're considering adjusting your portfolio. The recovery timeframe for this sector is estimated to be around 6-12 months.",
+        "question_text": "What action do you take regarding the underperforming sector?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Sell the entire allocation to the sector, trying to limit further losses",
+            "risk_signal": 0.05,
+            "behavioral_tag": "loss_aversion"
+          },
+          {
+            "id": "B",
+            "text": "Hold the current allocation, hoping the sector will recover in the next 6-12 months",
+            "risk_signal": 0.4,
+            "behavioral_tag": "patient_investor"
+          },
+          {
+            "id": "C",
+            "text": "Rebalance the portfolio by reducing the allocation to the sector and increasing exposure to other areas",
+            "risk_signal": 0.3,
+            "behavioral_tag": "disciplined_investor"
+          },
+          {
+            "id": "D",
+            "text": "Increase the allocation to the sector, trying to take advantage of the low prices",
+            "risk_signal": 0.8,
+            "behavioral_tag": "aggressive_investor"
+          }
+        ],
+        "market_context_used": "Underperforming sector and estimated recovery timeframe",
+        "behavioral_insight": "Tests loss aversion: whether user prioritizes avoiding losses over potential gains"
+      }
+    ],
+    "market_calibration": {
+      "stress_multiplier": 0.645,
+      "regime_used": "bear_high_vol",
+      "volatility_state": "elevated",
+      "risk_level": "low",
+      "calibration_notes": "Market regime: bear_high_vol; MODERATE STRESS: Questions probe intermediate risk scenarios; Elevated volatility (elevated) -- incorporating drawdown scenarios; ML models disagree on regime -- probing for ambiguity tolerance"
+    },
+    "generation_method": "llm",
+    "agent_metadata": {
+      "agent_id": "agent2_behavioral_intelligence",
+      "llm_calls": 1,
+      "llm_latency_ms": 4532.2,
+      "phase1_time_ms": 4969,
+      "execution_log": [
+        {
+          "step": "calibration",
+          "status": "success",
+          "duration_ms": 0,
+          "timestamp": "2026-02-27T11:48:50.507943Z"
+        },
+        {
+          "step": "question_generation",
+          "status": "success",
+          "duration_ms": 4969,
+          "timestamp": "2026-02-27T11:48:55.476960Z"
+        },
+        {
+          "step": "validation",
+          "status": "success",
+          "duration_ms": 0,
+          "timestamp": "2026-02-27T11:48:55.476960Z"
+        }
+      ]
+    }
+  },
+  "phase2_profile": {
+    "session_id": "daq_20260227_114850_791b74",
+    "timestamp": "2026-02-27T11:48:56.771155Z",
+    "risk_classification": {
+      "risk_score": 0.5356,
+      "risk_score_raw": 0.5756,
+      "market_adjusted": true,
+      "behavioral_type": "moderate_volatile",
+      "confidence": 0.32,
+      "liquidity_preference": "medium",
+      "time_horizon": "medium",
+      "max_acceptable_drawdown": 0.23
+    },
+    "behavioral_profile": {
+      "consistency_score": 0.07,
+      "emotional_stability": "moderate",
+      "emotional_stability_score": 0.61,
+      "contradiction_flags": [
+        {
+          "type": "cross_question",
+          "severity": 0.62,
+          "description": "User showed aggressive behavior in regret_aversion scenario but conservative in loss_aversion -- risk signal gap of 50%",
+          "question_ids": [
+            "q_791b74_1",
+            "q_791b74_4"
+          ]
+        },
+        {
+          "type": "cross_question",
+          "severity": 0.69,
+          "description": "User showed aggressive behavior in herd_behavior scenario but conservative in loss_aversion -- risk signal gap of 55%",
+          "question_ids": [
+            "q_791b74_3",
+            "q_791b74_4"
+          ]
+        },
+        {
+          "type": "stress_induced",
+          "severity": 0.75,
+          "description": "User becomes more aggressive under stress scenarios (risk signal shift: 45%)",
+          "question_ids": [
+            "q_791b74_1",
+            "q_791b74_2",
+            "q_791b74_3",
+            "q_791b74_4"
+          ]
+        }
+      ],
+      "detected_biases": [
+        {
+          "bias_type": "loss_aversion",
+          "strength": 0.84,
+          "evidence": "Risk tolerance drops significantly in loss scenarios (avg signal: 0.30 vs overall: 0.64)"
+        }
+      ],
+      "stress_response_pattern": "fight",
+      "decision_speed_profile": "moderate"
+    },
+    "llm_narrative": {
+      "investor_narrative": "This investor exhibits a moderate to volatile behavioral profile, with a risk score of 0.5356, and a tendency to become more aggressive under stress scenarios, as evidenced by a 45% risk signal shift. Their decision-making is influenced by loss aversion, with a strength of 0.84, and they display a fight response pattern under stress. The investor's consistency score of 0.07 suggests potential inconsistencies in their decision-making process.",
+      "key_insights": [
+        "The investor's risk tolerance drops significantly in loss scenarios, with an average signal of 0.30 compared to an overall signal of 0.64, indicating a strong loss aversion bias.",
+        "The investor's behavioral profile is marked by contradiction flags, including a 50% risk signal gap between regret aversion and loss aversion scenarios, and a 55% gap between herd behavior and loss aversion scenarios."
+      ],
+      "risk_warnings": [
+        "The investor's tendency to become more aggressive under stress scenarios, combined with their moderate emotional stability score of 0.61, may lead to impulsive decisions that compromise their investment objectives."
+      ],
+      "recommended_guardrails": [
+        "Implementing a 20% stop-loss threshold to mitigate potential losses, given the investor's maximum acceptable drawdown of 23% and their tendency to exhibit loss aversion."
+      ]
+    },
+    "market_regime_at_assessment": "bear_high_vol",
+    "questions_asked": 4,
+    "answers_processed": 4,
+    "agent_metadata": {
+      "agent_id": "agent2_behavioral_intelligence",
+      "version": "1.0.0",
+      "execution_time_ms": 1292,
+      "llm_calls": 2,
+      "llm_total_latency_ms": 5821,
+      "models_used": [
+        "question_calibrator_v1",
+        "behavioral_consistency_analyzer_v1",
+        "adaptive_risk_classifier_v1",
+        "llm_core_model"
+      ],
+      "execution_log": [
+        {
+          "step": "behavioral_analysis",
+          "status": "success",
+          "duration_ms": 0,
+          "timestamp": "2026-02-27T11:48:55.478960Z"
+        },
+        {
+          "step": "risk_classification",
+          "status": "success",
+          "duration_ms": 0,
+          "timestamp": "2026-02-27T11:48:55.479961Z"
+        },
+        {
+          "step": "llm_narrative",
+          "status": "success",
+          "duration_ms": 1289,
+          "timestamp": "2026-02-27T11:48:56.770140Z"
+        }
+      ]
+    }
+  }
+}

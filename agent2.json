@@ -1,0 +1,254 @@
+{
+  "phase1_questions": {
+    "session_id": "daq_20260227_114022_d5ed62",
+    "timestamp": "2026-02-27T11:40:27.743154Z",
+    "questions": [
+      {
+        "question_id": "q_1",
+        "category": "sunk_cost",
+        "difficulty": 0.26,
+        "scenario": "You invested $100,000 in a tech stock 2 years ago, which has since dropped to $80,000. The current bull_low_vol regime has the VIX at 19.13, and your financial advisor suggests it's a good time to reassess your portfolio.",
+        "question_text": "What do you do with the tech stock?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Sell the stock immediately to cut losses",
+            "risk_signal": 0.1,
+            "behavioral_tag": "sunk_cost_avoidance"
+          },
+          {
+            "id": "B",
+            "text": "Hold the stock, hoping it will recover to at least the initial investment",
+            "risk_signal": 0.4,
+            "behavioral_tag": "sunk_cost_fallacy"
+          },
+          {
+            "id": "C",
+            "text": "Average down by investing another $20,000 in the stock",
+            "risk_signal": 0.7,
+            "behavioral_tag": "sunk_cost_commitment"
+          },
+          {
+            "id": "D",
+            "text": "Rebalance the portfolio by selling a portion of the stock and diversifying",
+            "risk_signal": 0.5,
+            "behavioral_tag": "sunk_cost_management"
+          }
+        ],
+        "market_context_used": "VIX at 19.13 in bull_low_vol regime",
+        "behavioral_insight": "Tests sunk cost fallacy: whether user holds onto a losing investment due to initial cost"
+      },
+      {
+        "question_id": "q_2",
+        "category": "overconfidence",
+        "difficulty": 0.47,
+        "scenario": "The yield curve has inverted, with the 2-year Treasury yield at 5.35% and the 10-year at 5.25%. You believe this signals an impending recession and decide to act.",
+        "question_text": "What investment strategy do you adopt?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Shift entirely to short-term bonds, expecting a recession to hit soon",
+            "risk_signal": 0.2,
+            "behavioral_tag": "overconfidence_in_prediction"
+          },
+          {
+            "id": "B",
+            "text": "Maintain a diversified portfolio, as the timing of recessions is hard to predict",
+            "risk_signal": 0.5,
+            "behavioral_tag": "cautious_realism"
+          },
+          {
+            "id": "C",
+            "text": "Increase allocation to stocks, believing the market will rally before a recession",
+            "risk_signal": 0.8,
+            "behavioral_tag": "overconfidence_in_market_timing"
+          },
+          {
+            "id": "D",
+            "text": "Hedge the portfolio with options, preparing for both recession and rally scenarios",
+            "risk_signal": 0.6,
+            "behavioral_tag": "prudent_hedging"
+          }
+        ],
+        "market_context_used": "Inverted yield curve with 2-year at 5.35% and 10-year at 5.25%",
+        "behavioral_insight": "Tests overconfidence: whether user overestimates ability to predict market turns"
+      },
+      {
+        "question_id": "q_3",
+        "category": "disposition_effect",
+        "difficulty": 0.26,
+        "scenario": "One of your stocks has risen 25% in the last quarter, while another has dropped 12%. The current bull_low_vol regime has the VIX at 19.13, indicating a relatively stable market.",
+        "question_text": "What action do you take regarding these two stocks?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Sell the winning stock to lock in gains and hold the losing stock, hoping it recovers",
+            "risk_signal": 0.3,
+            "behavioral_tag": "disposition_effect"
+          },
+          {
+            "id": "B",
+            "text": "Hold both stocks, as the market is in a bull phase and both may continue to perform well",
+            "risk_signal": 0.5,
+            "behavioral_tag": "neutral_disposition"
+          },
+          {
+            "id": "C",
+            "text": "Sell the losing stock to cut losses and reinvest in the winning stock",
+            "risk_signal": 0.7,
+            "behavioral_tag": "rational_disposition"
+          },
+          {
+            "id": "D",
+            "text": "Rebalance the portfolio by selling a portion of the winning stock and buying more of the losing stock",
+            "risk_signal": 0.4,
+            "behavioral_tag": "contrarian_disposition"
+          }
+        ],
+        "market_context_used": "VIX at 19.13 in bull_low_vol regime",
+        "behavioral_insight": "Tests disposition effect: whether user sells winners too early and holds losers too long"
+      },
+      {
+        "question_id": "q_4",
+        "category": "regret_aversion",
+        "difficulty": 0.18,
+        "scenario": "The unemployment rate is at 3.9%, and the Fed has set the interest rate at 5.25%. You are considering whether to invest $50,000 in a new stock or wait for more economic data.",
+        "question_text": "What do you do with the $50,000?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Invest the $50,000 immediately, fearing missing out on potential gains",
+            "risk_signal": 0.8,
+            "behavioral_tag": "fomo_driven"
+          },
+          {
+            "id": "B",
+            "text": "Wait for the next economic report before making a decision",
+            "risk_signal": 0.2,
+            "behavioral_tag": "regret_aversion"
+          },
+          {
+            "id": "C",
+            "text": "Invest $25,000 now and wait for more data before deciding on the rest",
+            "risk_signal": 0.5,
+            "behavioral_tag": "cautious_investment"
+          },
+          {
+            "id": "D",
+            "text": "Diversify the $50,000 across several assets to minimize risk",
+            "risk_signal": 0.4,
+            "behavioral_tag": "prudent_diversification"
+          }
+        ],
+        "market_context_used": "Unemployment at 3.9% and Fed rate at 5.25%",
+        "behavioral_insight": "Tests regret aversion: whether user is paralyzed by fear of making the wrong investment decision"
+      }
+    ],
+    "market_calibration": {
+      "stress_multiplier": 0.226,
+      "regime_used": "bull_low_vol",
+      "volatility_state": "normal",
+      "risk_level": "low",
+      "calibration_notes": "Market regime: bull_low_vol; LOW STRESS: Questions focus on preference discovery and subtle biases"
+    },
+    "generation_method": "llm",
+    "agent_metadata": {
+      "agent_id": "agent2_behavioral_intelligence",
+      "llm_calls": 1,
+      "llm_latency_ms": 4341.1,
+      "phase1_time_ms": 4928,
+      "execution_log": [
+        {
+          "step": "calibration",
+          "status": "success",
+          "duration_ms": 0,
+          "timestamp": "2026-02-27T11:40:22.815986Z"
+        },
+        {
+          "step": "question_generation",
+          "status": "success",
+          "duration_ms": 4927,
+          "timestamp": "2026-02-27T11:40:27.743154Z"
+        },
+        {
+          "step": "validation",
+          "status": "success",
+          "duration_ms": 1,
+          "timestamp": "2026-02-27T11:40:27.744158Z"
+        }
+      ]
+    }
+  },
+  "phase2_profile": {
+    "session_id": "daq_20260227_114022_d5ed62",
+    "timestamp": "2026-02-27T11:40:28.868791Z",
+    "risk_classification": {
+      "risk_score": 0.5153,
+      "risk_score_raw": 0.5653,
+      "market_adjusted": true,
+      "behavioral_type": "moderate_balanced",
+      "confidence": 0.73,
+      "liquidity_preference": "medium",
+      "time_horizon": "medium",
+      "max_acceptable_drawdown": 0.23
+    },
+    "behavioral_profile": {
+      "consistency_score": 0.76,
+      "emotional_stability": "stable",
+      "emotional_stability_score": 0.84,
+      "contradiction_flags": [],
+      "detected_biases": [],
+      "stress_response_pattern": "adapt",
+      "decision_speed_profile": "deliberate"
+    },
+    "llm_narrative": {
+      "investor_narrative": "This investor exhibits a moderate-balanced behavioral type with a risk score of 0.5153, indicating a willingness to take on moderate levels of risk. Their emotional stability score of 0.84 and stable emotional stability classification suggest they can navigate market fluctuations without significant emotional distress. Their max acceptable drawdown of 0.23, or 23%, is a key metric in understanding their risk tolerance.",
+      "key_insights": [
+        "The investor's consistency score of 0.76 indicates a relatively high level of decision-making consistency, which can be beneficial in a bull_low_vol regime with low risk.",
+        "The absence of detected biases and contradiction flags in their behavioral profile suggests a low likelihood of impulsive decisions, supported by their deliberate decision-speed profile."
+      ],
+      "risk_warnings": [
+        "The investor's medium liquidity preference and medium time horizon may lead to overreaction during sudden market downturns, potentially resulting in drawdowns exceeding their max acceptable level of 23%."
+      ],
+      "recommended_guardrails": [
+        "Implementing a stop-loss strategy with a 20% threshold to protect against potential drawdowns and align with the investor's max acceptable drawdown of 23%."
+      ]
+    },
+    "market_regime_at_assessment": "bull_low_vol",
+    "questions_asked": 4,
+    "answers_processed": 4,
+    "agent_metadata": {
+      "agent_id": "agent2_behavioral_intelligence",
+      "version": "1.0.0",
+      "execution_time_ms": 1124,
+      "llm_calls": 2,
+      "llm_total_latency_ms": 5462,
+      "models_used": [
+        "question_calibrator_v1",
+        "behavioral_consistency_analyzer_v1",
+        "adaptive_risk_classifier_v1",
+        "llm_core_model"
+      ],
+      "execution_log": [
+        {
+          "step": "behavioral_analysis",
+          "status": "success",
+          "duration_ms": 0,
+          "timestamp": "2026-02-27T11:40:27.745650Z"
+        },
+        {
+          "step": "risk_classification",
+          "status": "success",
+          "duration_ms": 0,
+          "timestamp": "2026-02-27T11:40:27.746150Z"
+        },
+        {
+          "step": "llm_narrative",
+          "status": "success",
+          "duration_ms": 1122,
+          "timestamp": "2026-02-27T11:40:28.868536Z"
+        }
+      ]
+    }
+  }
+}

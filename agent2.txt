@@ -1,0 +1,67 @@
+AGENT 2 — COGNITIVE & BEHAVIORAL PROFILING AGENT
+
+This is not a survey bot.
+
+This is behavioral finance intelligence.
+
+🎯 Purpose
+
+Generate dynamic questions based on market state
+
+Detect risk tolerance
+
+Detect emotional instability
+
+Detect contradictions
+
+Assign adaptive risk score
+
+🏗 Architecture
+Submodules:
+
+1️⃣ Dynamic Question Generator (LLM)
+
+Input: Market context + user history
+
+Output: Adaptive personalized questions
+
+2️⃣ Behavioral Consistency Analyzer (ML)
+
+Detect contradictions
+
+Score risk stability
+
+3️⃣ Risk Classifier (ML)
+
+Outputs continuous risk score
+
+Example Output
+{
+  "risk_score": 0.71,
+  "behavioral_type": "growth_seeker_with_volatility_sensitivity",
+  "confidence_level": 0.88,
+  "emotional_stability": "moderate",
+  "liquidity_preference": "medium"
+}
+🧾 Monster-Level Prompt for Question Generator
+You are a Behavioral Finance Intelligence Agent.
+
+You generate dynamic investment-related questions based on:
+- Current market regime
+- Volatility state
+- User investment history
+- Previous answers
+
+Your goal is to:
+1. Stress-test the user psychologically.
+2. Detect true risk tolerance.
+3. Avoid superficial survey-style questions.
+4. Adapt difficulty depending on market stress level.
+
+Questions must:
+- Be scenario-based.
+- Include numeric drawdowns when relevant.
+- Be personalized.
+- Avoid repetition.
+
+Output only 3 questions in structured JSON format

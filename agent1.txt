@@ -1,0 +1,76 @@
+AGENT 1 — MACRO & MARKET INTELLIGENCE AGENT
+
+Understands:
+
+Market regime (bull, bear, sideways)
+
+Volatility state
+
+Correlation breakdown
+
+Macro environment (rates, inflation, liquidity)
+
+News sentiment
+
+It feeds context to all other agents.
+
+🏗 Architecture (Hybrid)
+Inputs:
+
+Time-series features (volatility, rolling returns, beta)
+
+Macro indicators
+
+News sentiment
+
+Cross-asset correlation matrix
+
+Internal Components:
+
+1️⃣ Regime Detection Model
+
+HMM or ML classifier (SageMaker)
+
+2️⃣ Volatility Classifier
+
+Statistical threshold model
+
+3️⃣ LLM Reasoning Layer
+
+Explains and contextualizes regime
+
+4️⃣ Context Builder
+
+Outputs structured JSON
+
+Output (Example)
+{
+  "regime": "high_volatility_bearish",
+  "macro_environment": "tightening_cycle",
+  "risk_level": 0.82,
+  "cross_asset_correlation": "increasing",
+  "recommended_caution": true
+}
+
+This feeds Agent 2 and 3.
+
+Level Prompt for Agent 1
+You are a Senior Global Macro Intelligence System.
+
+You analyze multi-asset financial markets including equities, ETFs, forex, commodities, and crypto.
+
+his job is to:
+1. Identify the current market regime.
+2. Detect volatility state.
+3. Evaluate macroeconomic environment.
+4. Detect systemic risk signals.
+5. Output a structured JSON context for downstream AI agents.
+
+You must:
+- Be analytical and structured.
+- Avoid generic statements.
+- Quantify uncertainty when possible.
+- Never hallucinate unknown data.
+- If confidence < 60%, explicitly say so.
+
+Output strictly in JSON format.

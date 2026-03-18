@@ -1,0 +1,105 @@
+# Agent 1 -- Macro & Market Intelligence System: Walkthrough
+
+## What Was Built
+
+A complete hybrid LLM+ML intelligence agent that analyzes multi-asset financial markets and produces structured JSON for downstream AI agents.
+
+### Architecture
+
+```mermaid
+graph TD
+    A["Binance API<br/>(Crypto)"] --> D["Market Data Aggregator"]
+    B["TwelveData API<br/>(Equities, ETFs, Forex)"] --> D
+    C["FRED API<br/>(Macro)"] --> M["Macro Data Fetcher"]
+    D --> FE["Feature Engine"]
+    FE --> RD["Regime Detector<br/>(HMM + RF Ensemble)"]
+    FE --> VC["Volatility Classifier"]
+    FE --> SR["Risk Detector"]
+    M --> MA["Macro Analyzer"]
+    MA --> SR
+    RD --> CB["LLM Context Builder<br/>(3-Stage Gemini Reasoning)"]
+    VC --> CB
+    MA --> CB
+    SR --> CB
+    CB --> OUT["Agent 1 JSON Output"]
+    OUT --> V["Pydantic Schema Validation"]
+```
+
+### Files Created (20 files)
+
+| Layer | File | Purpose |
+|-------|------|---------|
+| Config | [settings.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/config/settings.py) | API keys, LLM params, market universes, ML hyperparams |
+| Data | [market_data.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/data/market_data.py) | Binance + TwelveData fetchers with TTL cache |
+| Data | [macro_data.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/data/macro_data.py) | FRED API for 6 macro dimensions |
+| ML | [feature_engine.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/feature_engine.py) | Returns, volatility, momentum, correlation, drawdown |
+| ML | [regime_detector.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/regime_detector.py) | HMM + Random Forest ensemble regime detection |
+| ML | [volatility_classifier.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/volatility_classifier.py) | Multi-dimensional vol state classification |
+| ML | [macro_analyzer.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/macro_analyzer.py) | Macro regime scoring and classification |
+| ML | [risk_detector.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/risk_detector.py) | 5-signal systemic risk detection |
+| LLM | [gemini_client.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/llm/gemini_client.py) | Provider-agnostic LLM abstraction + factory |
+| LLM | [prompts.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/llm/prompts.py) | 3-stage prompt templates |
+| LLM | [context_builder.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/llm/context_builder.py) | Multi-stage LLM reasoning pipeline |
+| Schema | [agent1_output.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/schemas/agent1_output.py) | Pydantic output contract |
+| Agent | [agent1_macro.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent1_macro.py) | 10-step orchestrator with graceful degradation |
+| Entry | [main.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/main.py) | CLI with mock mode and validation |
+| Tests | [test_agent1.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/tests/test_agent1.py) | 25 tests across all components |
+
+## Verification Results
+
+### Tests: 25/25 Passing
+
+```
+tests/test_agent1.py::TestFeatureEngine::test_compute_returns PASSED
+tests/test_agent1.py::TestFeatureEngine::test_compute_realized_volatility PASSED
+tests/test_agent1.py::TestFeatureEngine::test_compute_rsi PASSED
+tests/test_agent1.py::TestFeatureEngine::test_compute_macd PASSED
+tests/test_agent1.py::TestFeatureEngine::test_compute_correlation_matrix PASSED
+tests/test_agent1.py::TestFeatureEngine::test_compute_drawdown PASSED
+tests/test_agent1.py::TestFeatureEngine::test_build_features PASSED
+tests/test_agent1.py::TestFeatureEngine::test_build_regime_features PASSED
+tests/test_agent1.py::TestRegimeDetector::test_detect_regime PASSED
+tests/test_agent1.py::TestRegimeDetector::test_hmm_detector PASSED
+tests/test_agent1.py::TestRegimeDetector::test_rf_classifier PASSED
+tests/test_agent1.py::TestVolatilityClassifier::test_classify PASSED
+tests/test_agent1.py::TestVolatilityClassifier::test_classify_vix_extreme PASSED
+tests/test_agent1.py::TestMacroAnalyzer::test_analyze PASSED
+tests/test_agent1.py::TestMacroAnalyzer::test_risk_factors PASSED
+tests/test_agent1.py::TestRiskDetector::test_detect PASSED
+tests/test_agent1.py::TestRiskDetector::test_high_risk_scenario PASSED
+tests/test_agent1.py::TestSchema::test_valid_output PASSED
+tests/test_agent1.py::TestSchema::test_invalid_confidence PASSED
+tests/test_agent1.py::TestLLMClient::test_factory_creates_gemini PASSED
+tests/test_agent1.py::TestLLMClient::test_factory_unknown_provider PASSED
+tests/test_agent1.py::TestLLMClient::test_base_client_interface PASSED
+tests/test_agent1.py::TestAgent1Pipeline::test_mock_pipeline_runs PASSED
+tests/test_agent1.py::TestAgent1Pipeline::test_mock_output_regime PASSED
+tests/test_agent1.py::TestAgent1Pipeline::test_mock_output_schema_valid PASSED
+================== 25 passed in 93.11s ===================
+```
+
+### Mock Pipeline Output (key results)
+
+| Dimension | Result |
+|-----------|--------|
+| **Market Regime** | `bull_low_vol` (confidence: 0.98, HMM+RF agree) |
+| **Volatility State** | `normal` (VIX: 19.13, percentile: 35.5) |
+| **Macro Regime** | `stable_growth` (composite: -0.10) |
+| **Systemic Risk** | `low` (0.15) -- yield curve inverted |
+| **Risk Appetite** | 0.85 (high) |
+
+## How to Run
+
+```bash
+# Mock mode (no API keys needed)
+python main.py --agent 1 --mock
+
+# Live mode (requires API keys in .env)
+python main.py --agent 1 --output result.json
+
+# Validate API keys
+python main.py --agent 1 --validate
+
+# Run tests
+pytest tests/ -v
+```

@@ -1,0 +1,279 @@
+﻿2026-03-06 22:37:10 | __main__                       | INFO    | Starting Hybrid Intelligence Portfolio System v1.0.0
+2026-03-06 22:37:10 | numexpr.utils                  | INFO    | NumExpr defaulting to 8 threads.
+2026-03-06 22:37:13 | agents.agent5_news             | INFO    | 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-03-06 22:37:13 | agents.agent5_news             | INFO    | |  AGENT 5 -- NEWS SENTIMENT INTELLIGENCE                  |
+2026-03-06 22:37:13 | agents.agent5_news             | INFO    | |  Hybrid Intelligence Portfolio System v1.0.0           |
+2026-03-06 22:37:13 | agents.agent5_news             | INFO    | ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-03-06 22:37:13 | agents.agent5_news             | INFO    | STEP 1/10 -- Collecting news from multiple sources...
+2026-03-06 22:37:13 | ml.news_collector              | WARNING | feedparser not installed. Skipping RSS collection.
+2026-03-06 22:37:13 | ml.news_collector              | INFO    | NewsAPI key not configured, skipping.
+2026-03-06 22:37:15 | ml.news_collector              | INFO    | News Collection Complete: 15 articles (raw: 20, dedup: 5, sources: 1)
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    |   ÔööÔöÇÔöÇ collection completed in 1411ms
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    | STEP 2/10 -- Cleaning and filtering articles...
+2026-03-06 22:37:15 | ml.news_processor              | INFO    | Processing Complete: 0/15 articles passed (15 filtered)
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    |   ÔööÔöÇÔöÇ processing completed in 40ms
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    | STEP 3/10 -- Generating vector embeddings...
+2026-03-06 22:37:15 | ml.news_embedding              | INFO    | sentence-transformers not installed. Using hash-based fallback.
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    |   ÔööÔöÇÔöÇ embedding completed in 0ms
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    | STEP 4/10 -- Running semantic deduplication...
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    |   ÔööÔöÇÔöÇ deduplication completed in 0ms
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    | STEP 5/10 -- Clustering related articles...
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    |   ÔööÔöÇÔöÇ clustering completed in 0ms
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    | STEP 6/10 -- Running hybrid sentiment analysis (FinBERT + LLM)...
+2026-03-06 22:37:15 | ml.sentiment_engine            | INFO    | Sentiment Analysis Complete: 0 articles, FinBERT: 0, LLM: 0, Fallback: 0, Agreement: 0/0
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    |   ÔööÔöÇÔöÇ sentiment_analysis completed in 0ms
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    | STEP 7/10 -- Computing multi-factor impact scores...
+2026-03-06 22:37:15 | ml.impact_scorer               | INFO    | Impact Scoring Complete: 0 articles | High: 0, Medium: 0, Low: 0
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    |   ÔööÔöÇÔöÇ impact_scoring completed in 0ms
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    | STEP 8/10 -- Scanning for black swan / macro events...
+2026-03-06 22:37:15 | ml.event_detector              | INFO    | Event Detection: No significant events detected.
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    |   ÔööÔöÇÔöÇ event_detection completed in 0ms
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    | STEP 9/10 -- Computing temporal sentiment momentum...
+2026-03-06 22:37:15 | ml.temporal_aggregator         | INFO    | Temporal Aggregation Complete: 0 articles | Regime: neutral | Momentum: stable (+0.00) | 1h=0.00, 24h=0.00, 7d=0.00
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    |   ÔööÔöÇÔöÇ temporal_aggregation completed in 0ms
+2026-03-06 22:37:15 | agents.agent5_news             | INFO    | STEP 10/10 -- Synthesizing final market signal (LLM)...
+2026-03-06 22:37:15 | llm.gemini_client              | INFO    | LLM provider registered: groq
+2026-03-06 22:37:15 | llm.gemini_client              | INFO    | LLM client created: groq
+2026-03-06 22:37:15 | llm.groq_client                | INFO    | Groq client initialized (model: llama-3.3-70b-versatile)
+2026-03-06 22:37:17 | httpx                          | INFO    | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-06 22:37:17 | llm.groq_client                | INFO    | Groq response: 1498 chars, 297 tokens, 1516ms (llama-3.3-70b-versatile)
+2026-03-06 22:37:17 | llm.news_analyst               | WARNING | Failed to parse LLM analysis response: expected string or bytes-like object
+2026-03-06 22:37:17 | agents.agent5_news             | INFO    |   ÔööÔöÇÔöÇ market_signal_synthesis completed in 2300ms
+2026-03-06 22:37:17 | agents.agent5_news             | INFO    | 
+============================================================
+AGENT 5 COMPLETE
+  Articles:     0 processed (from 20 raw)
+  Signal:       neutral (weak)
+  Confidence:   20.0%
+  Regime:       neutral
+  Momentum:     stable
+  Events:       0 (none)
+  Bias:         {"crypto": 0.0, "equities": 0.0, "bonds": 0.0, "commodities": 0.0, "forex": 0.0}
+  Exec Time:    3750ms
+  Data Quality: full
+============================================================
+
+==============================================================
+  AGENT 5 OUTPUT -- News Sentiment Intelligence
+==============================================================
+
+{
+  "timestamp": "2026-03-06T21:37:17.479622+00:00Z",
+  "data_freshness": "",
+  "articles": [],
+  "article_count": 0,
+  "temporal_sentiment": {
+    "overall_1h": 0.0,
+    "overall_6h": 0.0,
+    "overall_24h": 0.0,
+    "overall_3d": 0.0,
+    "overall_7d": 0.0,
+    "crypto_sentiment": {
+      "1h": 0.0,
+      "6h": 0.0,
+      "24h": 0.0,
+      "3d": 0.0,
+      "7d": 0.0
+    },
+    "equities_sentiment": {
+      "1h": 0.0,
+      "6h": 0.0,
+      "24h": 0.0,
+      "3d": 0.0,
+      "7d": 0.0
+    },
+    "bonds_sentiment": {
+      "1h": 0.0,
+      "6h": 0.0,
+      "24h": 0.0,
+      "3d": 0.0,
+      "7d": 0.0
+    },
+    "commodities_sentiment": {
+      "1h": 0.0,
+      "6h": 0.0,
+      "24h": 0.0,
+      "3d": 0.0,
+      "7d": 0.0
+    },
+    "sentiment_momentum": "stable",
+    "momentum_strength": 0.0,
+    "regime_sentiment": "neutral"
+  },
+  "event_detection": {
+    "events_detected": [],
+    "has_critical_event": false,
+    "highest_severity": "none",
+    "event_count": 0,
+    "risk_alert": "No significant market events detected.",
+    "recommended_action": "monitor"
+  },
+  "market_signal": {
+    "signal_type": "neutral",
+    "confidence": 0.2,
+    "affected_assets": [],
+    "signal_strength": "weak",
+    "primary_driver": "",
+    "recommended_bias": {
+      "crypto": 0.0,
+      "equities": 0.0,
+      "bonds": 0.0,
+      "commodities": 0.0,
+      "forex": 0.0
+    },
+    "narrative": "News sentiment analysis based on 0 financial articles indicates a neutral market sentiment regime with stable momentum. ",
+    "risk_events": []
+  },
+  "llm_analysis": {
+    "market_narrative": "News sentiment analysis based on 0 financial articles indicates a neutral market sentiment regime with stable momentum. ",
+    "key_themes": [],
+    "risk_assessment": "No significant market events detected.",
+    "allocation_implications": "",
+    "confidence_level": 0.4,
+    "contrarian_signals": []
+  },
+  "agent_metadata": {
+    "agent_id": "agent5_news_intelligence",
+    "version": "1.0.0",
+    "execution_time_ms": 3750,
+    "timestamp": "2026-03-06T21:37:17.479622+00:00Z",
+    "articles_collected": 20,
+    "articles_processed": 0,
+    "sources_queried": [
+      "gdelt"
+    ],
+    "sources_failed": [
+      "rss_feeds",
+      "cryptopanic"
+    ],
+    "models_used": [
+      "news_collector_v1",
+      "news_processor_v1",
+      "llm_core_model",
+      "impact_scorer_v1",
+      "event_detector_v1",
+      "temporal_aggregator_v1"
+    ],
+    "data_quality": "full",
+    "execution_log": [
+      {
+        "step": "collection",
+        "status": "success",
+        "duration_ms": 1411,
+        "timestamp": "2026-03-06T21:37:15.140116+00:00Z",
+        "details": {
+          "articles_raw": 15,
+          "sources_queried": [
+            "gdelt"
+          ],
+          "sources_failed": [
+            "rss_feeds",
+            "cryptopanic"
+          ]
+        }
+      },
+      {
+        "step": "processing",
+        "status": "success",
+        "duration_ms": 40,
+        "timestamp": "2026-03-06T21:37:15.179750+00:00Z",
+        "details": {
+          "input": 15,
+          "output": 0,
+          "filtered": 15
+        }
+      },
+      {
+        "step": "embedding",
+        "status": "success",
+        "duration_ms": 0,
+        "timestamp": "2026-03-06T21:37:15.179750+00:00Z",
+        "details": {
+          "articles_embedded": 0
+        }
+      },
+      {
+        "step": "deduplication",
+        "status": "success",
+        "duration_ms": 0,
+        "timestamp": "2026-03-06T21:37:15.179750+00:00Z",
+        "details": {
+          "before": 0,
+          "after": 0,
+          "removed": 0
+        }
+      },
+      {
+        "step": "clustering",
+        "status": "success",
+        "duration_ms": 0,
+        "timestamp": "2026-03-06T21:37:15.179750+00:00Z",
+        "details": {
+          "articles": 0,
+          "clusters": 0
+        }
+      },
+      {
+        "step": "sentiment_analysis",
+        "status": "success",
+        "duration_ms": 0,
+        "timestamp": "2026-03-06T21:37:15.179750+00:00Z",
+        "details": {
+          "analyzed": 0,
+          "finbert_used": 0,
+          "llm_used": 0,
+          "fallback_used": 0,
+          "agreements": 0
+        }
+      },
+      {
+        "step": "impact_scoring",
+        "status": "success",
+        "duration_ms": 0,
+        "timestamp": "2026-03-06T21:37:15.179750+00:00Z",
+        "details": {
+          "scored": 0,
+          "high_impact": 0,
+          "medium_impact": 0,
+          "low_impact": 0
+        }
+      },
+      {
+        "step": "event_detection",
+        "status": "success",
+        "duration_ms": 0,
+        "timestamp": "2026-03-06T21:37:15.179750+00:00Z",
+        "details": {
+          "events_detected": 0,
+          "highest_severity": "none",
+          "has_critical": false
+        }
+      },
+      {
+        "step": "temporal_aggregation",
+        "status": "success",
+        "duration_ms": 0,
+        "timestamp": "2026-03-06T21:37:15.179750+00:00Z",
+        "details": {
+          "regime": "neutral",
+          "momentum": "stable",
+          "1h": 0.0,
+          "24h": 0.0,
+          "7d": 0.0
+        }
+      },
+      {
+        "step": "market_signal_synthesis",
+        "status": "success",
+        "duration_ms": 2300,
+        "timestamp": "2026-03-06T21:37:17.479622+00:00Z",
+        "details": {
+          "signal_type": "neutral",
+          "confidence": 0.2,
+          "llm_calls": 1
+        }
+      }
+    ]
+  }
+}

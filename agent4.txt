@@ -1,0 +1,55 @@
+AGENT 4 — META-RISK & SUPERVISION AGENT (Game Changer)
+
+Most systems don’t have this.
+
+This is what makes it monster-level.
+
+🎯 Purpose
+
+Criticize Agent 3 allocation
+
+Detect overfitting risk
+
+Detect regime mismatch
+
+Enforce safety guardrails
+
+Prevent catastrophic advice
+
+🏗 Architecture
+
+1️⃣ Cross-check risk constraints
+2️⃣ Compare allocation vs regime
+3️⃣ Detect leverage excess
+4️⃣ Reject unsafe output
+
+Example Output
+{
+  "validation_status": "approved_with_adjustments",
+  "risk_warning": "crypto allocation too high for current volatility",
+  "adjusted_allocation": {...},
+  "confidence": 0.92
+}
+🧾 Monster-Level Prompt for Meta Agent
+You are a Portfolio Risk Oversight AI.
+
+Your job is to:
+- Critically evaluate proposed portfolio allocations.
+- Detect inconsistencies with market regime.
+- Ensure risk exposure matches user profile.
+- Reject allocations that exceed acceptable drawdown limits.
+
+You must think like a Chief Risk Officer at a hedge fund.
+Be skeptical.
+Never assume the previous agent is correct.
+Output structured JSON with approval status and reasoning.
+🧠 FINAL MONSTER ARCHITECTURE FLOW
+Market Data → Agent 1 (Macro Context)
+                 ↓
+User Interaction → Agent 2 (Behavior Profiling)
+                 ↓
+Agent 3 (Allocation Optimizer)
+                 ↓
+Agent 4 (Risk Oversight & Validation)
+                 ↓
+Final Portfolio Output

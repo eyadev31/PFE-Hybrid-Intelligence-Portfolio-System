@@ -1,0 +1,373 @@
+Now we design a production-grade fintech database schema for your Hybrid Intelligence Portfolio System on AWS.
+
+This will be:
+
+Clean
+
+Scalable
+
+Multi-asset (stocks, ETFs, forex, crypto, commodities)
+
+Ready for ML + LLM agents
+
+Audit-ready
+
+Binance-compatible
+
+We’ll design it like a real fintech startup.
+
+🏛 MASTER DATABASE ARCHITECTURE
+
+We use a polyglot persistence strategy:
+
+Data Type	AWS Service	Why
+User & relational data	Amazon RDS (PostgreSQL)	ACID + strong consistency
+Market time-series	Amazon Timestream	Optimized for financial time-series
+Raw data / logs	Amazon S3	Cheap + scalable
+Fast session data	DynamoDB	Low latency
+ML features	SageMaker Feature Store	MLOps ready
+1️⃣ CORE RELATIONAL SCHEMA (PostgreSQL – RDS)
+
+This is your backbone.
+
+🧑 USERS TABLE
+users (
+    id UUID PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash TEXT,
+    created_at TIMESTAMP,
+    is_verified BOOLEAN DEFAULT FALSE,
+    country VARCHAR(100),
+    kyc_status VARCHAR(50),
+    risk_score FLOAT,
+    onboarding_completed BOOLEAN DEFAULT FALSE
+);
+
+Why:
+
+Stores authentication info
+
+Risk score updated by Agent 2
+
+Ready for compliance later
+
+📊 USER_PROFILE TABLE
+user_profile (
+    id UUID PRIMARY KEY,
+    user_id UUID REFERENCES users(id),
+    investment_horizon INT, -- in months
+    liquidity_preference VARCHAR(50),
+    income_level VARCHAR(50),
+    experience_level VARCHAR(50),
+    behavioral_type VARCHAR(50),
+    updated_at TIMESTAMP
+);
+
+Stores structured profile extracted by Behavioral Agent.
+
+❓ DYNAMIC_QUESTIONS TABLE
+dynamic_questions (
+    id UUID PRIMARY KEY,
+    question_text TEXT,
+    market_context JSONB,
+    regime_tag VARCHAR(50),
+    created_at TIMESTAMP
+);
+
+Agent 1 generates questions dynamically based on:
+
+Market regime
+
+Volatility
+
+Macro signals
+
+market_context example:
+
+{
+  "volatility": "high",
+  "inflation": 3.4,
+  "trend": "bearish"
+}
+📝 USER_ANSWERS TABLE
+user_answers (
+    id UUID PRIMARY KEY,
+    user_id UUID REFERENCES users(id),
+    question_id UUID REFERENCES dynamic_questions(id),
+    answer_value TEXT,
+    numeric_score FLOAT,
+    answered_at TIMESTAMP
+);
+
+Used by:
+
+Agent 2 (Risk classifier)
+
+Behavioral consistency analysis
+
+📈 ASSETS TABLE (Multi-Asset Support)
+assets (
+    id UUID PRIMARY KEY,
+    symbol VARCHAR(20),
+    name VARCHAR(255),
+    asset_type VARCHAR(50), -- stock, etf, crypto, forex, commodity
+    exchange VARCHAR(50),
+    base_currency VARCHAR(10),
+    quote_currency VARCHAR(10),
+    is_active BOOLEAN DEFAULT TRUE
+);
+
+Example:
+
+BTCUSDT → crypto
+
+AAPL → stock
+
+GLD → ETF
+
+XAUUSD → commodity
+
+📊 PORTFOLIOS TABLE
+portfolios (
+    id UUID PRIMARY KEY,
+    user_id UUID REFERENCES users(id),
+    total_value FLOAT,
+    expected_return FLOAT,
+    expected_volatility FLOAT,
+    sharpe_ratio FLOAT,
+    created_at TIMESTAMP
+);
+
+Each recommendation = new portfolio snapshot.
+
+📌 PORTFOLIO_ALLOCATIONS TABLE
+portfolio_allocations (
+    id UUID PRIMARY KEY,
+    portfolio_id UUID REFERENCES portfolios(id),
+    asset_id UUID REFERENCES assets(id),
+    allocation_percentage FLOAT,
+    expected_contribution FLOAT
+);
+
+Stores allocation breakdown.
+
+📉 EXECUTION_ORDERS TABLE
+execution_orders (
+    id UUID PRIMARY KEY,
+    user_id UUID REFERENCES users(id),
+    asset_id UUID REFERENCES assets(id),
+    order_type VARCHAR(20), -- buy/sell
+    quantity FLOAT,
+    price FLOAT,
+    status VARCHAR(50),
+    exchange VARCHAR(50),
+    created_at TIMESTAMP
+);
+
+If Binance integration enabled:
+
+Store order ID from Binance
+
+Track execution status
+
+2️⃣ TIME-SERIES DATABASE (Amazon Timestream)
+
+We do NOT store OHLC in PostgreSQL.
+
+We store in Timestream:
+
+Table: market_prices
+
+Columns:
+
+time (timestamp)
+
+symbol
+
+open
+
+high
+
+low
+
+close
+
+volume
+
+asset_type
+
+Optimized for:
+
+Backtesting
+
+Volatility calculations
+
+Correlation matrices
+
+Regime detection
+
+3️⃣ FEATURE STORE (ML Layer)
+
+Using SageMaker Feature Store:
+
+Feature group: asset_features
+
+Features:
+
+rolling_volatility_30d
+
+rolling_return_90d
+
+beta
+
+momentum_score
+
+macro_correlation
+
+sentiment_score
+
+Feature group: user_behavior_features
+
+avg_response_time
+
+risk_score_trend
+
+answer_consistency_score
+
+Feeds:
+
+Risk classifier
+
+Allocation optimizer
+
+Regime detection model
+
+4️⃣ RAW DATA STORAGE (S3)
+
+Buckets:
+
+s3://fintech-ai/raw-market-data/
+s3://fintech-ai/model-artifacts/
+s3://fintech-ai/agent-prompts/
+s3://fintech-ai/logs/
+
+Used for:
+
+API raw responses
+
+Backtesting datasets
+
+Prompt versioning
+
+Model checkpoints
+
+5️⃣ EVENT LOGGING TABLE (Audit-Ready)
+system_events (
+    id UUID PRIMARY KEY,
+    user_id UUID,
+    event_type VARCHAR(100),
+    metadata JSONB,
+    created_at TIMESTAMP
+);
+
+Tracks:
+
+Portfolio generated
+
+Risk reclassification
+
+Market shock event
+
+Order submitted
+
+Important for:
+
+Compliance
+
+Debugging
+
+Trust
+
+🔐 SECURITY & INDEXING STRATEGY
+
+Add indexes:
+
+CREATE INDEX idx_user_id ON portfolios(user_id);
+CREATE INDEX idx_symbol ON assets(symbol);
+CREATE INDEX idx_time ON market_prices(time);
+
+Sensitive fields:
+
+Encrypt at rest (AWS KMS)
+
+Use IAM roles
+
+Never store raw passwords
+
+🧠 HOW AGENTS USE THIS DATABASE
+
+Agent 1:
+
+Reads market regime from feature store
+
+Stores generated questions
+
+Agent 2:
+
+Reads answers
+
+Updates risk_score in users table
+
+Agent 3:
+
+Pulls features from feature store
+
+Writes new portfolio + allocations
+
+Execution layer:
+
+Writes execution_orders
+
+Updates portfolio status
+
+🎯 FINAL STRUCTURE SUMMARY
+RDS (Postgres)
+ ├── users
+ ├── user_profile
+ ├── dynamic_questions
+ ├── user_answers
+ ├── assets
+ ├── portfolios
+ ├── portfolio_allocations
+ ├── execution_orders
+ ├── system_events
+
+Timestream
+ ├── market_prices
+
+S3
+ ├── raw data
+ ├── logs
+ ├── prompts
+ ├── model artifacts
+
+SageMaker Feature Store
+ ├── asset_features
+ ├── user_behavior_features
+🚀 Why This Is Institutional Level
+
+Because:
+
+Multi-asset ready
+
+Fully normalized
+
+Supports ML pipelines
+
+Supports LLM agents
+
+Event-auditable
+
+Binance-ready
+
+Cloud scalable

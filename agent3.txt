@@ -1,0 +1,64 @@
+AGENT 3 — STRATEGIC ALLOCATION & OPTIMIZATION AGENT
+
+This is your quant brain.
+
+🎯 Purpose
+
+Multi-asset allocation
+
+Risk-adjusted optimization
+
+Scenario simulation
+
+Tail risk control
+
+🏗 Architecture
+Core Engine:
+
+1️⃣ Feature Retrieval
+
+Pull asset features from Feature Store
+
+2️⃣ Portfolio Optimizer
+
+Mean-Variance
+
+Risk Parity
+
+CVaR constraint
+
+3️⃣ Monte Carlo Simulator
+
+10,000 scenarios
+
+4️⃣ LLM Explanation Layer
+
+Translate quant output to human language
+
+Output Example
+{
+  "allocation": {
+    "SPY": 0.35,
+    "GLD": 0.15,
+    "BND": 0.25,
+    "BTC": 0.10,
+    "Cash": 0.15
+  },
+  "expected_return": 0.087,
+  "expected_volatility": 0.13,
+  "max_drawdown_estimate": 0.18,
+  "strategy_type": "defensive_growth"
+}
+🧾 Monster-Level Prompt for Explanation Layer
+You are a Quantitative Portfolio Strategist.
+
+Explain the allocation decision based on:
+- Market regime
+- User risk profile
+- Correlation structure
+- Expected drawdown control
+
+Be precise.
+No vague motivational language.
+Explain trade-offs clearly.
+Do not overpromise performance.

@@ -1,0 +1,85 @@
+# Agent 2 -- Cognitive & Behavioral Profiling Agent: Walkthrough
+
+## What Was Built
+
+A masterpiece-level Behavioral Finance Intelligence Agent that dynamically profiles investors through adaptive, scenario-based questioning calibrated to real market conditions from Agent 1.
+
+### Architecture
+
+```mermaid
+graph TD
+    A1["Agent 1 Output<br/>(Regime, Vol, Risk)"] --> QC["Question Calibrator<br/>(ML)"]
+    QC --> |stress_multiplier,<br/>categories| QG["Question Generator<br/>(LLM + Fallback Bank)"]
+    QG --> Q["4 Adaptive Questions"]
+    Q --> UA["User Answers"]
+    UA --> BCA["Behavioral Consistency<br/>Analyzer (ML)"]
+    UA --> RC["Adaptive Risk<br/>Classifier (ML)"]
+    BCA --> |contradictions,<br/>biases, stability| OUT
+    RC --> |risk_score,<br/>behavioral_type| OUT
+    OUT --> LLM["LLM Narrative<br/>(Gemini)"]
+    LLM --> FINAL["Agent 2 JSON Output"]
+    FINAL --> A3["Agent 3 Input"]
+```
+
+### Key Capabilities
+
+| Feature | Detail |
+|---------|--------|
+| **10 Behavioral Biases** | loss_aversion, herd_behavior, anchoring, time_pressure, regret_aversion, overconfidence, recency_bias, disposition_effect, mental_accounting, sunk_cost |
+| **8 Behavioral Types** | conservative_stable/anxious, moderate_balanced/volatile, growth_seeker (+vol sensitivity), aggressive_speculator/contrarian |
+| **4 Stress Responses** | fight, flight, freeze, adapt |
+| **3 Contradiction Types** | cross_question, stress_induced, anchoring |
+| **Market-Adjusted Scoring** | Risk score modified by regime, vol, stability, stress response |
+
+### Files Created (7 new + 1 modified)
+
+| File | Purpose |
+|------|---------|
+| [agent2_output.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/schemas/agent2_output.py) | Pydantic schemas (2 phases) |
+| [question_engine.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/question_engine.py) | Stress calibration + category selection |
+| [behavioral_analyzer.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/behavioral_analyzer.py) | Contradiction & bias detection |
+| [risk_classifier.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/risk_classifier.py) | Continuous 0-1 risk scoring |
+| [question_generator.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/llm/question_generator.py) | LLM generation + 8-question fallback bank |
+| [agent2_daq.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent2_daq.py) | Orchestrator with mock mode |
+| [test_agent2.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/tests/test_agent2.py) | 23 tests |
+| [main.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/main.py) | Added `--agent 2` support |
+
+## Verification Results
+
+### Tests: 23/23 Passing
+
+```
+TestQuestionCalibrator     (5 tests) -- PASSED
+TestBehavioralAnalyzer     (4 tests) -- PASSED
+TestRiskClassifier         (5 tests) -- PASSED
+TestSchemas                (3 tests) -- PASSED
+TestQuestionGenerator      (1 test)  -- PASSED
+TestAgent2Pipeline         (5 tests) -- PASSED
+================== 23 passed in 119.81s ===================
+```
+
+### Mock Pipeline Output (key results)
+
+| Dimension | Result |
+|-----------|--------|
+| **Risk Score** | 0.37 (moderate) |
+| **Behavioral Type** | `moderate_volatile` |
+| **Consistency** | 0.07 (contradictions detected) |
+| **Emotional Stability** | `moderate` (score: 0.58) |
+| **Stress Response** | `adapt` |
+| **Decision Speed** | `moderate` |
+| **Contradictions** | 2 cross-question flags |
+| **Biases Detected** | recency_bias (strength: 0.87) |
+
+## How to Run
+
+```bash
+# Mock mode (no API keys needed)
+python main.py --agent 2 --mock --output agent2_output.json
+
+# With Agent 1 live context
+python main.py --agent 2 --agent1-json live_output.json
+
+# Run tests
+pytest tests/test_agent2.py -v
+```

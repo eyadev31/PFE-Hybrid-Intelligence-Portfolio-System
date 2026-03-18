@@ -1,0 +1,21 @@
+step 4: ADD PORTFOLIO EVOLUTION ENGINE
+
+Monster systems don’t just recommend once.
+
+They:
+
+Re-evaluate weekly
+
+Detect drift from target allocation
+
+Adjust only if necessary
+
+Avoid over-trading
+
+Add:
+
+Rebalancing logic with:
+
+Transaction cost modeling
+
+Threshold rebalancing (e.g., 5% drift)

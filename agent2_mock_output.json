@@ -1,0 +1,272 @@
+{
+  "phase1_questions": {
+    "session_id": "daq_20260224_212945_ac28a3",
+    "timestamp": "2026-02-24T21:29:53.984087Z",
+    "questions": [
+      {
+        "category": "anchoring",
+        "scenario": "You bought shares at $100. The stock dropped to $60, then recovered to $85. Fundamentals suggest fair value is $80. Your original $100 purchase price keeps influencing your thinking.",
+        "question_text": "At what price would you sell the stock?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Sell now at $85 -- take the loss and move on to better opportunities",
+            "risk_signal": 0.4,
+            "behavioral_tag": "rational"
+          },
+          {
+            "id": "B",
+            "text": "Hold until $100 -- you need to at least break even",
+            "risk_signal": 0.3,
+            "behavioral_tag": "anchoring"
+          },
+          {
+            "id": "C",
+            "text": "Hold until $120 -- you deserve a profit for enduring the drawdown",
+            "risk_signal": 0.6,
+            "behavioral_tag": "anchoring"
+          },
+          {
+            "id": "D",
+            "text": "Buy more at $85 since fair value is $80 -- the anchoring to $100 is irrelevant",
+            "risk_signal": 0.8,
+            "behavioral_tag": "contrarian"
+          }
+        ],
+        "behavioral_insight": "Tests anchoring to purchase price: can investor evaluate based on current fundamentals",
+        "question_id": "q_ac28a3_1",
+        "difficulty": 0.34,
+        "market_context_used": "Market regime: bull_low_vol"
+      },
+      {
+        "category": "herd_behavior",
+        "scenario": "A viral social media trend is driving a 40% rally in a speculative asset class. Your colleagues and friends are all investing. Financial news covers it 24/7. The asset has no fundamental backing.",
+        "question_text": "How do you respond to this market frenzy?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Ignore it completely -- speculative assets don't belong in a serious portfolio",
+            "risk_signal": 0.1,
+            "behavioral_tag": "disciplined"
+          },
+          {
+            "id": "B",
+            "text": "Research it thoroughly, then allocate a small 2-3% position if fundamentals support it",
+            "risk_signal": 0.4,
+            "behavioral_tag": "moderate_risk"
+          },
+          {
+            "id": "C",
+            "text": "Invest 10% of your portfolio -- there's clearly momentum here",
+            "risk_signal": 0.7,
+            "behavioral_tag": "herd_behavior"
+          },
+          {
+            "id": "D",
+            "text": "Go all-in on the trend -- you don't want to miss the next big thing",
+            "risk_signal": 0.95,
+            "behavioral_tag": "FOMO"
+          }
+        ],
+        "behavioral_insight": "Tests susceptibility to herd behavior and FOMO under social pressure",
+        "question_id": "q_ac28a3_2",
+        "difficulty": 0.44,
+        "market_context_used": "Market regime: bull_low_vol"
+      },
+      {
+        "category": "time_pressure",
+        "scenario": "Breaking news: A major geopolitical event causes markets to drop 5% in 30 minutes. Your broker calls and says you have 10 minutes to decide before the next circuit breaker halts trading.",
+        "question_text": "With only 10 minutes to decide, what do you do?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Sell everything before the circuit breaker hits -- protect what's left",
+            "risk_signal": 0.05,
+            "behavioral_tag": "panic"
+          },
+          {
+            "id": "B",
+            "text": "Sell half your positions to reduce exposure while keeping some upside",
+            "risk_signal": 0.35,
+            "behavioral_tag": "moderate_risk"
+          },
+          {
+            "id": "C",
+            "text": "Do nothing -- refuse to make decisions under time pressure",
+            "risk_signal": 0.55,
+            "behavioral_tag": "freeze"
+          },
+          {
+            "id": "D",
+            "text": "Place limit buy orders at 8% below current prices to catch the dip",
+            "risk_signal": 0.9,
+            "behavioral_tag": "contrarian"
+          }
+        ],
+        "behavioral_insight": "Tests decision quality under extreme time pressure and panic conditions",
+        "question_id": "q_ac28a3_3",
+        "difficulty": 0.48,
+        "market_context_used": "Market regime: bull_low_vol"
+      },
+      {
+        "category": "recency_bias",
+        "scenario": "Markets have been rallying for 6 months with the S&P 500 up 25%. Valuations are stretched at 22x earnings. Your portfolio is heavily in tech stocks that drove most of the gains.",
+        "question_text": "How do you position your portfolio for the next 12 months?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Rotate entirely into value stocks and bonds -- this rally can't continue",
+            "risk_signal": 0.15,
+            "behavioral_tag": "fearful"
+          },
+          {
+            "id": "B",
+            "text": "Rebalance to reduce tech concentration and add defensive sectors",
+            "risk_signal": 0.4,
+            "behavioral_tag": "moderate_risk"
+          },
+          {
+            "id": "C",
+            "text": "Hold current positions -- momentum is your friend and trends persist",
+            "risk_signal": 0.7,
+            "behavioral_tag": "recency_bias"
+          },
+          {
+            "id": "D",
+            "text": "Add more to the winners -- the best performers will keep outperforming",
+            "risk_signal": 0.9,
+            "behavioral_tag": "momentum_chasing"
+          }
+        ],
+        "behavioral_insight": "Tests recency bias: overweighting recent performance in forward-looking decisions",
+        "question_id": "q_ac28a3_4",
+        "difficulty": 0.39,
+        "market_context_used": "Market regime: bull_low_vol"
+      }
+    ],
+    "market_calibration": {
+      "stress_multiplier": 0.225,
+      "regime_used": "bull_low_vol",
+      "volatility_state": "normal",
+      "risk_level": "low",
+      "calibration_notes": "Market regime: bull_low_vol; LOW STRESS: Questions focus on preference discovery and subtle biases"
+    },
+    "generation_method": "fallback_bank",
+    "agent_metadata": {
+      "agent_id": "agent2_behavioral_intelligence",
+      "llm_calls": 0,
+      "llm_latency_ms": 0.0,
+      "phase1_time_ms": 8863,
+      "execution_log": [
+        {
+          "step": "calibration",
+          "status": "success",
+          "duration_ms": 1,
+          "timestamp": "2026-02-24T21:29:45.121822Z"
+        },
+        {
+          "step": "question_generation",
+          "status": "success",
+          "duration_ms": 8862,
+          "timestamp": "2026-02-24T21:29:53.984109Z"
+        },
+        {
+          "step": "validation",
+          "status": "success",
+          "duration_ms": 0,
+          "timestamp": "2026-02-24T21:29:53.984198Z"
+        }
+      ]
+    }
+  },
+  "phase2_profile": {
+    "session_id": "daq_20260224_212945_ac28a3",
+    "timestamp": "2026-02-24T21:30:01.307653Z",
+    "risk_classification": {
+      "risk_score": 0.3694,
+      "risk_score_raw": 0.4894,
+      "market_adjusted": true,
+      "behavioral_type": "moderate_volatile",
+      "confidence": 0.26,
+      "liquidity_preference": "medium",
+      "time_horizon": "medium",
+      "max_acceptable_drawdown": 0.17
+    },
+    "behavioral_profile": {
+      "consistency_score": 0.07,
+      "emotional_stability": "moderate",
+      "emotional_stability_score": 0.58,
+      "contradiction_flags": [
+        {
+          "type": "cross_question",
+          "severity": 0.81,
+          "description": "User showed aggressive behavior in anchoring scenario but very conservative in recency_bias -- risk signal gap of 65%",
+          "question_ids": [
+            "q_ac28a3_1",
+            "q_ac28a3_4"
+          ]
+        },
+        {
+          "type": "cross_question",
+          "severity": 0.69,
+          "description": "User showed growth-oriented behavior in herd_behavior scenario but very conservative in recency_bias -- risk signal gap of 55%",
+          "question_ids": [
+            "q_ac28a3_2",
+            "q_ac28a3_4"
+          ]
+        }
+      ],
+      "detected_biases": [
+        {
+          "bias_type": "recency_bias",
+          "strength": 0.87,
+          "evidence": "User heavily weights recent market events in decisions (recency risk signal: 0.15)"
+        }
+      ],
+      "stress_response_pattern": "adapt",
+      "decision_speed_profile": "moderate"
+    },
+    "llm_narrative": {
+      "investor_narrative": "Quantitative analysis indicates a moderate_volatile investor profile with risk score 0.37.",
+      "key_insights": [],
+      "risk_warnings": [],
+      "recommended_guardrails": []
+    },
+    "market_regime_at_assessment": "bull_low_vol",
+    "questions_asked": 4,
+    "answers_processed": 4,
+    "agent_metadata": {
+      "agent_id": "agent2_behavioral_intelligence",
+      "version": "1.0.0",
+      "execution_time_ms": 7323,
+      "llm_calls": 0,
+      "llm_total_latency_ms": 0,
+      "models_used": [
+        "question_calibrator_v1",
+        "behavioral_consistency_analyzer_v1",
+        "adaptive_risk_classifier_v1",
+        "gemini-2.0-flash"
+      ],
+      "execution_log": [
+        {
+          "step": "behavioral_analysis",
+          "status": "success",
+          "duration_ms": 1,
+          "timestamp": "2026-02-24T21:29:53.985497Z"
+        },
+        {
+          "step": "risk_classification",
+          "status": "success",
+          "duration_ms": 0,
+          "timestamp": "2026-02-24T21:29:53.985732Z"
+        },
+        {
+          "step": "llm_narrative",
+          "status": "success",
+          "duration_ms": 7322,
+          "timestamp": "2026-02-24T21:30:01.307653Z"
+        }
+      ]
+    }
+  }
+}

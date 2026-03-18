@@ -1,0 +1,10 @@
+Our system is not a single machine learning model trained on one dataset.
+Instead, it is a multi-module decision system designed to analyze financial markets from several perspectives.
+
+It combines regime detection using Hidden Markov Models, classification using Random Forest models, financial sentiment analysis using FinBERT, and risk optimization using Conditional Value at Risk constraints.
+
+The objective is not only to predict a variable but to produce robust and risk-aware decisions under different market conditions.
+
+A simple approach based on training a single Random Forest on a dataset would not capture regime shifts, news sentiment, or portfolio risk. Our architecture therefore integrates several models and analytical layers to better reflect the complexity of real financial systems.
+
+However, we still include standard ML practices such as data preprocessing, model training, and evaluation within each module of the system.

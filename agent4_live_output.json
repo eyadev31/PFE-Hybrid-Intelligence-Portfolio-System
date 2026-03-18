@@ -1,0 +1,212 @@
+{
+  "timestamp": "2026-02-26T09:33:15.761998Z",
+  "session_id": "daq_20260224_213214_dd2419",
+  "validation_status": "rejected",
+  "overall_risk_level": "critical",
+  "confidence": 0.86,
+  "risk_audits": [
+    {
+      "audit_name": "regime_consistency",
+      "verdict": "fail",
+      "severity": 0.72,
+      "finding": "Equity (44%) exceeds regime limit (40%) by 4% in bear_high_vol_1 regime; Crypto (12%) exceeds regime limit (8%) by 4% in bear_high_vol_1 regime",
+      "recommendation": "Reduce equity to \u226440%, crypto to \u22648%, increase defensive to \u226535%",
+      "details": {
+        "regime": "bear_high_vol_1",
+        "regime_rules": {
+          "max_equity": 0.4,
+          "max_crypto": 0.08,
+          "min_defensive": 0.35,
+          "description": "Bear regime: defensive posture required"
+        },
+        "allocation_weights": {
+          "SPY": 0.4361,
+          "BND": 0.11,
+          "GLD": 0.25,
+          "BTC": 0.1239,
+          "CASH": 0.08
+        },
+        "strategy": "growth",
+        "vol_state": "normal"
+      }
+    },
+    {
+      "audit_name": "profile_alignment",
+      "verdict": "pass",
+      "severity": 0.0,
+      "finding": "Allocation aligns with investor profile",
+      "recommendation": "No adjustments needed",
+      "details": {
+        "risk_score": 0.6656,
+        "behavioral_type": "growth_seeker",
+        "profile_rules": {
+          "max_equity": 0.55,
+          "max_crypto": 0.15,
+          "min_cash": 0.05
+        },
+        "risky_weight": 0.56,
+        "expected_risky_max": 0.6328
+      }
+    },
+    {
+      "audit_name": "drawdown_guardrails",
+      "verdict": "pass",
+      "severity": 0.0,
+      "finding": "Drawdown risk within acceptable limits",
+      "recommendation": "No adjustments needed",
+      "details": {
+        "investor_max_dd": 0.28,
+        "median_dd": 0.1176,
+        "prob_loss": 0.3127,
+        "prob_severe": 0.0082,
+        "var_95": 0.1464,
+        "cvar_95": 0.1904,
+        "worst_case": -0.2214
+      }
+    },
+    {
+      "audit_name": "concentration_audit",
+      "verdict": "warning",
+      "severity": 0.2,
+      "finding": "HHI concentration index (0.287) indicates moderate concentration (well-diversified: <0.20)",
+      "recommendation": "Reduce concentration in dominant assets. Rebalance towards equal risk contribution.",
+      "details": {
+        "hhi_index": 0.2865,
+        "weights": {
+          "SPY": 0.4361,
+          "BND": 0.11,
+          "GLD": 0.25,
+          "BTC": 0.1239,
+          "CASH": 0.08
+        },
+        "risk_contributions": {
+          "SPY": 0.3891,
+          "BND": 0.0,
+          "GLD": 0.128,
+          "BTC": 0.4828,
+          "CASH": 0.0
+        },
+        "non_zero_assets": 5,
+        "max_risk_contributor": "BTC"
+      }
+    },
+    {
+      "audit_name": "cross_agent_coherence",
+      "verdict": "fail",
+      "severity": 0.7,
+      "finding": "Agent 1 detected bear_high_vol_1 regime but Agent 3 chose growth strategy \u2014 fundamental directional mismatch; Agent 2 detected 1 high-severity behavioral contradictions, but risk score (0.67) is still elevated \u2014 investor's true risk tolerance may be lower than measured",
+      "recommendation": "Review Agent 3 assumptions against upstream signals. Consider more conservative allocation under regime uncertainty.",
+      "details": {
+        "regime": "bear_high_vol_1",
+        "risk_category": "low",
+        "models_agree": false,
+        "risk_score": 0.6656,
+        "behavioral_type": "growth_seeker",
+        "consistency": 0.65,
+        "stability": "stable",
+        "strategy": "growth"
+      }
+    }
+  ],
+  "total_audits": 5,
+  "audits_passed": 2,
+  "audits_warned": 1,
+  "audits_failed": 2,
+  "adjusted_allocation": [
+    {
+      "ticker": "SPY",
+      "original_weight": 0.4361,
+      "adjusted_weight": 0.3,
+      "change": -0.1361,
+      "reason": "Reduced from 44% to 30% \u2014 regime constraints require lower exposure"
+    },
+    {
+      "ticker": "BND",
+      "original_weight": 0.11,
+      "adjusted_weight": 0.23,
+      "change": 0.12,
+      "reason": "Increased from 11% to 23% \u2014 defensive floor to maintain safety margins"
+    },
+    {
+      "ticker": "GLD",
+      "original_weight": 0.25,
+      "adjusted_weight": 0.2614,
+      "change": 0.0114,
+      "reason": "Increased from 25% to 26% \u2014 defensive floor to maintain safety margins"
+    },
+    {
+      "ticker": "BTC",
+      "original_weight": 0.1239,
+      "adjusted_weight": 0.04,
+      "change": -0.0839,
+      "reason": "Reduced from 12% to 4% \u2014 regime constraints require lower exposure"
+    },
+    {
+      "ticker": "CASH",
+      "original_weight": 0.08,
+      "adjusted_weight": 0.1686,
+      "change": 0.0886,
+      "reason": "Increased from 8% to 17% \u2014 defensive floor to maintain safety margins"
+    }
+  ],
+  "original_allocation_preserved": false,
+  "risk_verdict": {
+    "decision": "rejected",
+    "confidence": 0.86,
+    "reasoning": "REJECTED: 2 audits failed with maximum severity 0.72. The proposed growth allocation is fundamentally incompatible with the current bear_high_vol_1 market regime and/or the investor's risk profile (score: 0.6656, max DD: 28%). Critical findings: Equity (44%) exceeds regime limit (40%) by 4% in bear_high_vol_1 regime; Crypto (12%) exceeds regime limit (8%) by 4% in bear_high_vol_1 regime; Agent 1 detected bear_high_vol_1 regime but Agent 3 chose growth strategy \u2014 fundamental directional mismatch; Agent 2 detected 1 high-severity behavioral contradictions, but risk score (0.67) is still elevated \u2014 investor's true risk tolerance may be lower than measured. The allocation must be reconstructed with tighter constraints.",
+    "critical_risks": [
+      "Equity (44%) exceeds regime limit (40%) by 4% in bear_high_vol_1 regime; Crypto (12%) exceeds regime limit (8%) by 4% in bear_high_vol_1 regime",
+      "Agent 1 detected bear_high_vol_1 regime but Agent 3 chose growth strategy \u2014 fundamental directional mismatch; Agent 2 detected 1 high-severity behavioral contradictions, but risk score (0.67) is still elevated \u2014 investor's true risk tolerance may be lower than measured"
+    ],
+    "mitigations_applied": [
+      "Reduced from 44% to 30% \u2014 regime constraints require lower exposure",
+      "Increased from 11% to 23% \u2014 defensive floor to maintain safety margins",
+      "Increased from 25% to 26% \u2014 defensive floor to maintain safety margins",
+      "Reduced from 12% to 4% \u2014 regime constraints require lower exposure",
+      "Increased from 8% to 17% \u2014 defensive floor to maintain safety margins"
+    ],
+    "residual_risks": [
+      "Maximum audit severity remains at 0.72 \u2014 continued monitoring recommended",
+      "Bear regime may persist \u2014 rebalancing triggers should be monitored"
+    ]
+  },
+  "market_regime": "bear_high_vol_1",
+  "investor_risk_score": 0.6656,
+  "proposed_strategy": "growth",
+  "agent_metadata": {
+    "agent_id": "agent4_risk_supervisor",
+    "version": "1.0.0",
+    "execution_time_ms": 9385,
+    "llm_calls": 0,
+    "llm_total_latency_ms": 0,
+    "models_used": [
+      "regime_consistency_auditor_v1",
+      "profile_alignment_auditor_v1",
+      "drawdown_guardrails_v1",
+      "concentration_auditor_v1",
+      "cross_agent_coherence_v1",
+      "allocation_adjuster_v1",
+      "gemini-2.0-flash"
+    ],
+    "execution_log": [
+      {
+        "step": "risk_audits",
+        "status": "success",
+        "duration_ms": 0,
+        "timestamp": "2026-02-26T09:33:06.376595Z"
+      },
+      {
+        "step": "allocation_adjustment",
+        "status": "success",
+        "duration_ms": 0,
+        "timestamp": "2026-02-26T09:33:06.376595Z"
+      },
+      {
+        "step": "cro_adjudication",
+        "status": "success",
+        "duration_ms": 9385,
+        "timestamp": "2026-02-26T09:33:15.761773Z"
+      }
+    ]
+  }
+}

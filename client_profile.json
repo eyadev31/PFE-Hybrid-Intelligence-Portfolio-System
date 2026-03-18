@@ -1,0 +1,265 @@
+{
+  "phase1_questions": {
+    "session_id": "daq_20260226_225124_ef8a26",
+    "timestamp": "2026-02-26T22:51:33.413182Z",
+    "questions": [
+      {
+        "category": "regret_aversion",
+        "scenario": "Last month you sold a stock at $50 that has since risen to $75. You originally bought it at $30. A new analysis suggests it could reach $100, but there's also a 30% chance it drops back to $50.",
+        "question_text": "Do you buy back into the stock?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "No -- buying at $75 what you sold at $50 is psychologically impossible",
+            "risk_signal": 0.15,
+            "behavioral_tag": "regret_aversion"
+          },
+          {
+            "id": "B",
+            "text": "Buy a small position -- you'd regret missing $100 more than losing on $50",
+            "risk_signal": 0.5,
+            "behavioral_tag": "moderate_risk"
+          },
+          {
+            "id": "C",
+            "text": "Buy the full position back -- the original sale was wrong, admit it and move on",
+            "risk_signal": 0.75,
+            "behavioral_tag": "rational"
+          },
+          {
+            "id": "D",
+            "text": "Buy even more than you originally held -- double down on the thesis",
+            "risk_signal": 0.9,
+            "behavioral_tag": "overconfidence"
+          }
+        ],
+        "behavioral_insight": "Tests regret aversion: can investor separate past decisions from current opportunities",
+        "question_id": "q_ef8a26_1",
+        "difficulty": 0.38,
+        "market_context_used": "Market regime: bear_high_vol"
+      },
+      {
+        "category": "overconfidence",
+        "scenario": "You've successfully timed the market 3 times this year, beating the S&P 500 by 8%. A friend suggests your 60/40 allocation is too conservative and you should go 90/10 given your track record.",
+        "question_text": "How do you adjust your strategy based on this year's success?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Keep the 60/40 -- past performance doesn't predict future results",
+            "risk_signal": 0.2,
+            "behavioral_tag": "disciplined"
+          },
+          {
+            "id": "B",
+            "text": "Slightly increase to 70/30 -- you've earned some extra risk",
+            "risk_signal": 0.5,
+            "behavioral_tag": "moderate_risk"
+          },
+          {
+            "id": "C",
+            "text": "Go 80/20 -- your skill is clearly above average",
+            "risk_signal": 0.75,
+            "behavioral_tag": "overconfidence"
+          },
+          {
+            "id": "D",
+            "text": "Go 90/10 with leverage -- maximize your edge while it lasts",
+            "risk_signal": 0.95,
+            "behavioral_tag": "extreme_overconfidence"
+          }
+        ],
+        "behavioral_insight": "Tests overconfidence bias: does investor mistake luck for skill",
+        "question_id": "q_ef8a26_2",
+        "difficulty": 0.39,
+        "market_context_used": "Market regime: bear_high_vol"
+      },
+      {
+        "category": "loss_aversion",
+        "scenario": "Markets are in a bear_high_vol regime. Your portfolio has declined 8% over the past month, and analysts predict a further 20% decline is possible before recovery.",
+        "question_text": "What action do you take with your portfolio right now?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Liquidate all equity positions immediately and move to money market funds",
+            "risk_signal": 0.05,
+            "behavioral_tag": "loss_aversion"
+          },
+          {
+            "id": "B",
+            "text": "Reduce equity by 40% and add Treasury bonds for safety",
+            "risk_signal": 0.25,
+            "behavioral_tag": "moderate_risk"
+          },
+          {
+            "id": "C",
+            "text": "Maintain current allocation but set stop-losses at 10% below current levels",
+            "risk_signal": 0.55,
+            "behavioral_tag": "neutral"
+          },
+          {
+            "id": "D",
+            "text": "Increase equity exposure by 15% -- market fear creates opportunity",
+            "risk_signal": 0.85,
+            "behavioral_tag": "contrarian"
+          }
+        ],
+        "behavioral_insight": "Core loss aversion test: measures panic threshold during drawdowns",
+        "question_id": "q_ef8a26_3",
+        "difficulty": 0.56,
+        "market_context_used": "Market regime: bear_high_vol"
+      },
+      {
+        "category": "anchoring",
+        "scenario": "You bought shares at $100. The stock dropped to $60, then recovered to $85. Fundamentals suggest fair value is $80. Your original $100 purchase price keeps influencing your thinking.",
+        "question_text": "At what price would you sell the stock?",
+        "choices": [
+          {
+            "id": "A",
+            "text": "Sell now at $85 -- take the loss and move on to better opportunities",
+            "risk_signal": 0.4,
+            "behavioral_tag": "rational"
+          },
+          {
+            "id": "B",
+            "text": "Hold until $100 -- you need to at least break even",
+            "risk_signal": 0.3,
+            "behavioral_tag": "anchoring"
+          },
+          {
+            "id": "C",
+            "text": "Hold until $120 -- you deserve a profit for enduring the drawdown",
+            "risk_signal": 0.6,
+            "behavioral_tag": "anchoring"
+          },
+          {
+            "id": "D",
+            "text": "Buy more at $85 since fair value is $80 -- the anchoring to $100 is irrelevant",
+            "risk_signal": 0.8,
+            "behavioral_tag": "contrarian"
+          }
+        ],
+        "behavioral_insight": "Tests anchoring to purchase price: can investor evaluate based on current fundamentals",
+        "question_id": "q_ef8a26_4",
+        "difficulty": 0.56,
+        "market_context_used": "Market regime: bear_high_vol"
+      }
+    ],
+    "market_calibration": {
+      "stress_multiplier": 0.646,
+      "regime_used": "bear_high_vol",
+      "volatility_state": "elevated",
+      "risk_level": "low",
+      "calibration_notes": "Market regime: bear_high_vol; MODERATE STRESS: Questions probe intermediate risk scenarios; Elevated volatility (elevated) -- incorporating drawdown scenarios; ML models disagree on regime -- probing for ambiguity tolerance"
+    },
+    "generation_method": "fallback_bank",
+    "agent_metadata": {
+      "agent_id": "agent2_behavioral_intelligence",
+      "llm_calls": 0,
+      "llm_latency_ms": 0.0,
+      "phase1_time_ms": 9405,
+      "execution_log": [
+        {
+          "step": "calibration",
+          "status": "success",
+          "duration_ms": 1,
+          "timestamp": "2026-02-26T22:51:24.009383Z"
+        },
+        {
+          "step": "question_generation",
+          "status": "success",
+          "duration_ms": 9404,
+          "timestamp": "2026-02-26T22:51:33.413182Z"
+        },
+        {
+          "step": "validation",
+          "status": "success",
+          "duration_ms": 1,
+          "timestamp": "2026-02-26T22:51:33.414201Z"
+        }
+      ]
+    }
+  },
+  "phase2_profile": {
+    "session_id": "daq_20260226_225124_ef8a26",
+    "timestamp": "2026-02-26T22:51:40.876402Z",
+    "risk_classification": {
+      "risk_score": 0.6722,
+      "risk_score_raw": 0.6622,
+      "market_adjusted": true,
+      "behavioral_type": "growth_seeker",
+      "confidence": 0.61,
+      "liquidity_preference": "medium",
+      "time_horizon": "long",
+      "max_acceptable_drawdown": 0.28
+    },
+    "behavioral_profile": {
+      "consistency_score": 0.64,
+      "emotional_stability": "moderate",
+      "emotional_stability_score": 0.71,
+      "contradiction_flags": [
+        {
+          "type": "anchoring",
+          "severity": 0.6,
+          "description": "User consistently selected choice 'C' (3/4 times) -- possible anchoring or satisficing behavior",
+          "question_ids": [
+            "q_ef8a26_1",
+            "q_ef8a26_2",
+            "q_ef8a26_3",
+            "q_ef8a26_4"
+          ]
+        }
+      ],
+      "detected_biases": [
+        {
+          "bias_type": "loss_aversion",
+          "strength": 0.41,
+          "evidence": "Risk tolerance drops significantly in loss scenarios (avg signal: 0.55 vs overall: 0.71)"
+        }
+      ],
+      "stress_response_pattern": "fight",
+      "decision_speed_profile": "deliberate"
+    },
+    "llm_narrative": {
+      "investor_narrative": "Quantitative analysis indicates a growth_seeker investor profile with risk score 0.67.",
+      "key_insights": [],
+      "risk_warnings": [],
+      "recommended_guardrails": []
+    },
+    "market_regime_at_assessment": "bear_high_vol",
+    "questions_asked": 4,
+    "answers_processed": 4,
+    "agent_metadata": {
+      "agent_id": "agent2_behavioral_intelligence",
+      "version": "1.0.0",
+      "execution_time_ms": 7460,
+      "llm_calls": 0,
+      "llm_total_latency_ms": 0,
+      "models_used": [
+        "question_calibrator_v1",
+        "behavioral_consistency_analyzer_v1",
+        "adaptive_risk_classifier_v1",
+        "gemini-2.0-flash"
+      ],
+      "execution_log": [
+        {
+          "step": "behavioral_analysis",
+          "status": "success",
+          "duration_ms": 1,
+          "timestamp": "2026-02-26T22:51:33.417182Z"
+        },
+        {
+          "step": "risk_classification",
+          "status": "success",
+          "duration_ms": 0,
+          "timestamp": "2026-02-26T22:51:33.417945Z"
+        },
+        {
+          "step": "llm_narrative",
+          "status": "success",
+          "duration_ms": 7457,
+          "timestamp": "2026-02-26T22:51:40.875406Z"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,429 @@
+# Hybrid Intelligence Portfolio System — React Native Mobile App
+
+Build a **government-grade, monster-masterpiece** React Native mobile app that integrates the existing 4-agent ML/LLM portfolio management pipeline with real Binance trading.
+
+---
+
+## Existing System Summary
+
+The backend is fully operational:
+
+| Component | Status | Location |
+|-----------|--------|----------|
+| **Agent 1** — Macro & Market Intelligence | ✅ Complete | [agents/agent1_macro.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent1_macro.py) |
+| **Agent 2** — Cognitive & Behavioral Profiling | ✅ Complete | [agents/agent2_daq.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent2_daq.py) |
+| **Agent 3** — Strategic Allocation & Optimizer | ✅ Complete | [agents/agent3_strategist.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent3_strategist.py) |
+| **Agent 4** — Meta-Risk & Supervision (CRO) | ✅ Complete | [agents/agent4_supervisor.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent4_supervisor.py) |
+| **Orchestrator** — 4-agent Pydantic-validated pipeline | ✅ Complete | [orchestrator.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/orchestrator.py) |
+| **FastAPI Server** — REST API (auth, daq, portfolio, dashboard) | ✅ Complete | [api/server.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/api/server.py) |
+| **Binance Service** — Full trading + balance API | ✅ Complete | [api/services/binance_service.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/api/services/binance_service.py) |
+| **ML Models** — Regime detection, risk classification, MonteCarlo | ✅ Complete | [ml/](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/analytics_dashboard.html) |
+| **LLM Layer** — Gemini + Groq clients | ✅ Complete | `llm/` |
+| **Pydantic Schemas** — Agent output contracts | ✅ Complete | `schemas/` |
+
+> [!IMPORTANT]
+> The mobile app will consume the existing FastAPI backend **as-is**. No core backend changes needed — only minor enhancements (auto-rebalance endpoint, WebSocket).
+
+---
+
+## User Review Required
+
+> [!CAUTION]
+> **Auto-Trading**: The app will include a button to **automatically execute trades** on the user's Binance account to match the AI-recommended allocation. This requires explicit user confirmation + PIN/biometric before every trade execution. Is this the behavior you want, or should it be read-only initially?
+
+> [!WARNING]
+> **Binance Testnet vs Production**: For development and initial deployment, I recommend using **Binance Testnet** (fake money) to avoid any accidental real trades. The app will have a toggle to switch between testnet and production. Confirm?
+
+> [!IMPORTANT]
+> **Backend Storage**: The current backend uses **in-memory storage** for users (`_users_db = {}`). For government-level production, this needs to be replaced with a proper database (PostgreSQL/Supabase). Should I also upgrade the backend storage as part of this plan, or keep it separate?
+
+---
+
+## Architecture
+
+```mermaid
+graph TB
+    subgraph MobileApp["React Native App (Expo)"]
+        direction TB
+        S1[Onboarding + Auth] --> S2[Binance Connection]
+        S2 --> S3[DAQ Questionnaire]
+        S3 --> S4[AI Pipeline Execution]
+        S4 --> S5[Dashboard + Portfolio]
+        S5 --> S6[Analytics + Reports]
+        S5 --> S7[Auto-Rebalance]
+    end
+
+    subgraph Backend["FastAPI Backend (Python)"]
+        A1["/api/auth"] --> A2["/api/portfolio"]
+        A2 --> A3["/api/daq"]
+        A3 --> A4["/api/dashboard"]
+        A4 --> A5["/api/portfolio/rebalance"]
+    end
+
+    subgraph Engine["4-Agent Intelligence Pipeline"]
+        AG1["Agent 1: Macro Intel<br/>(HMM + RF + LLM)"]
+        AG2["Agent 2: Behavioral<br/>(Dynamic Questions + ML Risk)"]
+        AG3["Agent 3: Optimizer<br/>(Mean-Var + MonteCarlo + LLM)"]
+        AG4["Agent 4: CRO Supervisor<br/>(Risk Audit + Safety)"]
+        AG1 --> AG2 --> AG3 --> AG4
+    end
+
+    subgraph External["External APIs"]
+        B[Binance API]
+        TD[TwelveData]
+        FR[FRED]
+        GM[Google Gemini]
+    end
+
+    MobileApp -->|REST API| Backend
+    Backend --> Engine
+    Engine --> External
+    Backend -->|Direct| B
+```
+
+---
+
+## Tech Stack
+
+| Layer | Technology | Justification |
+|-------|-----------|---------------|
+| **Framework** | Expo SDK 52 + React Native | Cross-platform (iOS + Android), government-standard |
+| **Language** | TypeScript (strict) | Type safety, catches bugs at compile time |
+| **Navigation** | Expo Router v4 | File-based routing, deep linking |
+| **Animations** | React Native Reanimated 3 | 60fps native animations, smooth UX |
+| **Charts** | react-native-svg + react-native-chart-kit | Allocation pie, equity curves, gauges |
+| **HTTP Client** | Axios | Interceptors for JWT, retry logic |
+| **Secure Storage** | expo-secure-store | Encrypted token + API key storage |
+| **Biometrics** | expo-local-authentication | FaceID / Fingerprint |
+| **State** | React Context + useReducer | Lightweight, no external deps |
+| **Haptics** | expo-haptics | Tactile feedback on actions |
+| **Blur** | expo-blur | Glassmorphism effects |
+| **Gradients** | expo-linear-gradient | Premium gradient backgrounds |
+| **Icons** | @expo/vector-icons (Ionicons) | Consistent icon set |
+
+---
+
+## App Screen Map
+
+```mermaid
+graph LR
+    subgraph Auth["Auth Group"]
+        O[Onboarding] --> L[Login]
+        L --> R[Register]
+    end
+
+    subgraph Main["Main Tabs"]
+        D[Dashboard] 
+        P[Portfolio]
+        Q[DAQ]
+        A[Analytics]
+        S[Settings]
+    end
+
+    subgraph Pipeline["Pipeline Flow"]
+        QI[DAQ Intro] --> QC[Question Cards]
+        QC --> PE[Pipeline Executing]
+        PE --> PR[Results]
+    end
+
+    Auth --> Main
+    Q --> Pipeline
+    PR --> D
+```
+
+---
+
+## Proposed Changes
+
+### Mobile App (NEW — Expo React Native)
+
+All files under: `c:\Users\yassi\OneDrive\Desktop\pfa f\mobile\`
+
+---
+
+#### [NEW] Project Setup Files
+
+| File | Purpose |
+|------|---------|
+| [package.json](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/webapp/package.json) | Dependencies + scripts |
+| `app.json` | Expo config (app name, splash, icons) |
+| `tsconfig.json` | TypeScript strict configuration |
+| `babel.config.js` | Babel config with Reanimated plugin |
+
+---
+
+#### [NEW] Design System — `mobile/theme/`
+
+| File | Purpose |
+|------|---------|
+| `colors.ts` | Dark/light color palettes (fintech dark primary) |
+| `typography.ts` | Font families (Inter), sizes, weights |
+| `spacing.ts` | Consistent spacing scale (4px base) |
+| `shadows.ts` | Glassmorphism + elevation shadows |
+| `index.ts` | Theme provider + `useTheme()` hook |
+
+**Color Palette** (dark mode primary):
+- Background: `#0A0E1A` (deep navy-black)
+- Surface: `#131829` (card background)
+- Primary: `#6C5CE7` → `#A29BFE` (purple gradient)
+- Accent: `#00D9FF` (electric cyan)
+- Success: `#00E676` (neon green)
+- Danger: `#FF5252` (vibrant red)
+- Warning: `#FFD740` (amber)
+- Text Primary: `#FFFFFF`
+- Text Secondary: `#8B95B0`
+- Glass: `rgba(255,255,255,0.06)` with blur
+
+---
+
+#### [NEW] Reusable Components — `mobile/components/`
+
+| File | Purpose |
+|------|---------|
+| `GlassCard.tsx` | Frosted glass card with blur + gradient border |
+| `AnimatedButton.tsx` | Pressable with scale animation + haptic |
+| `GradientText.tsx` | Text with linear gradient fill |
+| `AnimatedNumber.tsx` | Number that animates when value changes |
+| `LoadingOverlay.tsx` | Full-screen overlay with pulsing agents animation |
+| `RiskGauge.tsx` | Semicircle SVG gauge (0-1 risk score) |
+| `AllocationChart.tsx` | Animated donut/ring chart for portfolio allocation |
+| `RegimeBadge.tsx` | Pill badge showing market regime with pulse glow |
+| `AgentCard.tsx` | Agent status card during pipeline execution |
+| `KPICard.tsx` | Key metric card (return %, vol %, Sharpe, etc.) |
+| `QuestionCard.tsx` | Swipeable DAQ question card |
+| `AssetRow.tsx` | Binance asset row with icon + value + change |
+| `Header.tsx` | Screen header with back button + title |
+| `TabBar.tsx` | Custom bottom tab bar with glow indicator |
+
+---
+
+#### [NEW] API Service Layer — `mobile/services/`
+
+| File | Purpose |
+|------|---------|
+| `apiClient.ts` | Axios instance: base URL, JWT interceptor, error handling |
+| `authService.ts` | [register()](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/api/routes/auth.py#61-86), [login()](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/api/routes/auth.py#88-106), `getProfile()` |
+| `portfolioService.ts` | `connectBinance()`, `getBalances()`, `getPositions()`, `executeTrade()`, `rebalance()` |
+| `daqService.ts` | `startSession()`, `submitAnswers()`, `getHistory()`, `getSession()` |
+| `dashboardService.ts` | `getSummary()`, `getRegime()`, `getAnalytics()` |
+
+---
+
+#### [NEW] Contexts & Hooks — `mobile/contexts/` + `mobile/hooks/`
+
+| File | Purpose |
+|------|---------|
+| `contexts/AuthContext.tsx` | Auth state, token management, auto-login |
+| `contexts/PortfolioContext.tsx` | Binance connection state, balances cache |
+| `hooks/useAuth.ts` | Convenient auth hook |
+| `hooks/useApi.ts` | Generic API call hook with loading/error state |
+| `hooks/useAnimatedValue.ts` | Reanimated helper hook |
+
+---
+
+#### [NEW] TypeScript Types — `mobile/types/`
+
+| File | Purpose |
+|------|---------|
+| `api.ts` | Request/Response interfaces matching FastAPI schemas |
+| `agents.ts` | Agent output types matching Pydantic schemas |
+| `navigation.ts` | Route parameter types |
+
+---
+
+#### [NEW] Screens — `mobile/app/` (Expo Router)
+
+| Route | File | Description |
+|-------|------|-------------|
+| `/` | `app/index.tsx` | Splash + auto-login redirect |
+| `/onboarding` | `app/onboarding.tsx` | 3-page animated feature walkthrough |
+| `/login` | `app/(auth)/login.tsx` | Login with email/password + biometric |
+| `/register` | `app/(auth)/register.tsx` | Registration form |
+| **Tab: Dashboard** | `app/(tabs)/dashboard.tsx` | Main hub: allocation chart, KPIs, regime |
+| **Tab: Portfolio** | `app/(tabs)/portfolio.tsx` | Binance positions + asset list |
+| **Tab: AI Advisor** | `app/(tabs)/daq.tsx` | Start new DAQ session |
+| **Tab: Analytics** | `app/(tabs)/analytics.tsx` | Charts: equity curve, Monte Carlo |
+| **Tab: Settings** | `app/(tabs)/settings.tsx` | Profile, security, Binance keys |
+| `/daq/intro` | `app/daq/intro.tsx` | Market regime preview before questions |
+| `/daq/questions` | `app/daq/questions.tsx` | Swipeable question cards |
+| `/daq/pipeline` | `app/daq/pipeline.tsx` | Real-time agent execution visualization |
+| `/daq/results` | `app/daq/results.tsx` | Portfolio recommendation reveal |
+| `/connect-binance` | `app/connect-binance.tsx` | Binance API key connection flow |
+| `/rebalance` | `app/rebalance.tsx` | Auto-rebalance confirmation + execution |
+
+---
+
+### Backend Enhancements
+
+#### [NEW] [rebalance.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/api/routes/rebalance.py)
+New endpoint `POST /api/portfolio/rebalance` that:
+1. Takes the latest Agent 3/4 recommended allocation
+2. Compares with current Binance holdings
+3. Calculates required trades
+4. Executes trades (with user confirmation token)
+
+#### [MODIFY] [server.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/api/server.py)
+- Register the new rebalance router
+- Add mobile app origins to CORS
+
+---
+
+## Screen-by-Screen Design Details
+
+### 1. Onboarding (3 animated pages)
+- **Page 1**: "4 AI Agents Working For You" — animated agent icons in a pipeline flow
+- **Page 2**: "Connected to Binance" — animated wallet + coins illustration
+- **Page 3**: "Government-Grade Intelligence" — shield + brain animation
+- Skip button + dots indicator + "Get Started" CTA
+
+### 2. Login / Register
+- Full-screen gradient background (`#0A0E1A` → `#1A1040`)
+- Centered glassmorphism card with logo
+- Email + Password fields with animated focus states
+- Biometric button (FaceID / Fingerprint icon)
+- Social-style divider between email and biometric
+
+### 3. Binance Connection
+- Step-by-step wizard (3 steps):
+  1. Enter API Key + Secret (with QR scan option)
+  2. Validation animation (spinning lock → checkmark)
+  3. Live balance preview in glassmorphism cards
+
+### 4. DAQ Questionnaire
+- **Intro**: Shows current market regime from Agent 1 in a large animated badge
+  - "The market is currently in a HIGH_VOLATILITY_BEARISH regime"
+  - Risk level gauge animation
+- **Questions**: Swipeable cards (horizontal FlatList with snap)
+  - Each card shows the scenario question from Agent 2
+  - 4 answer options as tappable glass cards
+  - Progress bar at top
+- **Pipeline**: The hero screen — shows 4 agent cards in a vertical pipeline:
+  - Each card lights up sequentially as the agent runs
+  - Shows agent name, status (⏳ Running / ✅ Complete / ❌ Failed)
+  - Mini JSON preview of each agent's key output
+  - Estimated time remaining
+
+### 5. Dashboard (Main Tab)
+- **Top**: Greeting + total portfolio value (animated number)
+- **Market Regime Banner**: Colored pill + description from Agent 1
+- **Allocation Chart**: Animated donut chart with asset labels
+- **KPI Grid** (2x2): Expected Return, Volatility, Sharpe Ratio, CVaR
+- **Risk Verdict**: Agent 4 verdict card (approved/adjusted/rejected)
+- **Quick Actions**: "Run AI Advisor", "Rebalance", "View Analytics"
+
+### 6. Portfolio (Tab)
+- **Total Value**: Large animated number with 24h change
+- **Asset List**: Each row shows:
+  - Asset icon + name
+  - Current weight vs recommended weight
+  - Value in USD
+  - 24h change with color
+
+### 7. Analytics (Tab)
+- **Monte Carlo Fan Chart**: 10,000 scenario fan
+- **Equity Curve**: Line chart of portfolio performance
+- **Drawdown Chart**: Underwater chart
+- **Metrics Table**: Sortable table of all portfolio metrics
+
+### 8. Settings (Tab)
+- Profile section (name, email)
+- Binance connection status + manage
+- Security (biometrics toggle, change password)
+- App info + version
+
+---
+
+## User Flow (End-to-End)
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant App as React Native App
+    participant API as FastAPI Server
+    participant P as Pipeline (4 Agents)
+    participant B as Binance API
+
+    Note over U,B: First-Time Setup
+    U->>App: Open App → Onboarding
+    U->>App: Register (email + password)
+    App->>API: POST /api/auth/register
+    API-->>App: JWT Token
+    App->>App: Store token securely
+
+    U->>App: Enter Binance API Keys
+    App->>API: POST /api/portfolio/connect-binance
+    API->>B: Validate keys
+    B-->>API: Account info
+    API-->>App: Connected ✅
+
+    Note over U,B: AI Portfolio Analysis
+    U->>App: Tap "Start AI Advisor"
+    App->>API: POST /api/daq/start
+    API->>P: Run Agent 1 (Macro Intel)
+    P-->>API: Market context + Questions
+    API-->>App: 4 scenario questions
+
+    U->>App: Answer 4 questions
+    App->>API: POST /api/daq/submit
+    API->>P: Agent 2 (Profile) → Agent 3 (Optimize) → Agent 4 (Audit)
+    P-->>API: Full pipeline results
+    API-->>App: Portfolio recommendation
+
+    App->>App: Show Dashboard with allocation
+
+    Note over U,B: Auto-Rebalance (Optional)
+    U->>App: Tap "Rebalance Portfolio"
+    App->>API: POST /api/portfolio/rebalance
+    API->>B: Calculate + Execute trades
+    B-->>API: Trade confirmations
+    API-->>App: Rebalance complete ✅
+```
+
+---
+
+## Verification Plan
+
+### Automated Tests
+
+```bash
+# 1. TypeScript type checking
+cd mobile && npx tsc --noEmit
+
+# 2. Expo build verification (no native errors)
+cd mobile && npx expo export --platform web
+
+# 3. Backend API tests (existing)
+cd "c:\Users\yassi\OneDrive\Desktop\pfa f" && python -m pytest tests/ -v
+```
+
+### Browser-Based Testing
+Using the Expo web preview (`npx expo start --web`), I will use the browser tool to:
+1. Verify all screens render correctly
+2. Walk through the complete user flow (register → connect → DAQ → dashboard)
+3. Verify API calls are made correctly
+4. Check responsive layout and animations
+
+### Manual Verification
+Please test on a physical device using Expo Go:
+1. Install Expo Go from Play Store / App Store
+2. Scan the QR code from `npx expo start`
+3. Walk through: Onboarding → Register → Connect Binance (testnet) → Complete DAQ → View Dashboard
+4. Verify animations are smooth (60fps)
+5. Verify Binance balances show correctly
+6. Verify AI pipeline executes and shows results
+
+---
+
+## File Count Summary
+
+| Category | Files | Notes |
+|----------|-------|-------|
+| Project Config | 4 | package.json, app.json, tsconfig, babel |
+| Theme System | 5 | colors, typography, spacing, shadows, index |
+| Components | 14 | Reusable UI building blocks |
+| Services | 5 | API client + 4 service modules |
+| Contexts/Hooks | 5 | State management |
+| Types | 3 | TypeScript interfaces |
+| Screens | 15 | All app screens |
+| Backend | 2 | Rebalance route + server.py update |
+| **Total** | **~53 files** | |

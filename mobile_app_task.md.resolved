@@ -1,0 +1,85 @@
+# React Native Portfolio Intelligence App — Task Checklist
+
+## Phase 0: Planning
+- [x] Explore existing codebase (agents, API, ML, LLM, schemas, orchestrator)
+- [x] Understand all 4 agent architectures and data contracts
+- [x] Map existing FastAPI endpoints and Binance integration
+- [/] Write comprehensive implementation plan
+- [ ] User approval on implementation plan
+
+## Phase 1: Project Scaffolding
+- [ ] Initialize Expo (React Native) project with TypeScript
+- [ ] Install core dependencies (navigation, animations, charts, secure storage)
+- [ ] Set up project structure (screens, components, services, hooks, theme, types)
+- [ ] Configure Expo Router for file-based navigation
+- [ ] Set up design system (colors, typography, spacing, glassmorphism tokens)
+
+## Phase 2: Design System & Core Components
+- [ ] Create theme provider (dark mode primary, light mode secondary)
+- [ ] Build reusable `GlassCard` component with blur + gradient borders
+- [ ] Build `AnimatedButton` with haptic feedback
+- [ ] Build `GradientText` and `AnimatedNumber` components
+- [ ] Build `LoadingOverlay` with agent pipeline animation
+- [ ] Build `RiskGauge` (semicircle gauge) component
+- [ ] Build `AllocationChart` (animated donut/ring chart)
+- [ ] Build `RegimeBadge` (market regime indicator with pulse animation)
+- [ ] Build `AgentStatusCard` (shows each agent's status during pipeline)
+
+## Phase 3: API Service Layer
+- [ ] Create `apiClient.ts` (Axios instance with JWT interceptor + base URL config)
+- [ ] Create `authService.ts` (register, login, getProfile, token refresh)
+- [ ] Create `portfolioService.ts` (connect Binance, get balances, positions, trade)
+- [ ] Create `daqService.ts` (start session, submit answers, get history)
+- [ ] Create `dashboardService.ts` (summary, regime, analytics)
+- [ ] Create `types.ts` (TypeScript interfaces mirroring Pydantic schemas)
+- [ ] Create React Context for auth state + secure token storage
+
+## Phase 4: Screens — Auth Flow
+- [ ] Splash/Onboarding screen with animated feature walkthrough
+- [ ] Login screen with gradient background + glassmorphism form
+- [ ] Register screen with matching design
+- [ ] Biometric authentication prompt (FaceID / Fingerprint)
+
+## Phase 5: Screens — Binance Connection
+- [ ] Connect Binance screen (API key + secret input with validation)
+- [ ] Live balance preview after connection
+- [ ] Connection success animation
+
+## Phase 6: Screens — DAQ Questionnaire
+- [ ] DAQ intro screen showing real-time market regime from Agent 1
+- [ ] Swipeable question cards with scenario-based UI
+- [ ] Answer selection with animated feedback
+- [ ] Pipeline execution screen with real-time agent progress visualization
+- [ ] Results transition animation
+
+## Phase 7: Screens — Dashboard & Portfolio
+- [ ] Main dashboard with allocation donut chart + KPI cards
+- [ ] Portfolio positions list with real-time Binance data
+- [ ] Market regime banner with Agent 1 insights
+- [ ] Risk verdict section from Agent 4
+- [ ] Strategy explanation from Agent 3
+
+## Phase 8: Screens — Analytics & Details
+- [ ] Monte Carlo simulation results visualization
+- [ ] Performance metrics charts (equity curve, drawdown)
+- [ ] Allocation history over time
+- [ ] Agent pipeline detail view (full JSON explorer)
+
+## Phase 9: Screens — Settings & Profile
+- [ ] User profile screen
+- [ ] Binance connection management
+- [ ] Notification preferences
+- [ ] Security settings (biometrics, change password)
+- [ ] About / version info
+
+## Phase 10: Backend Enhancements
+- [ ] Add auto-rebalance endpoint (execute trades to match Agent 3 allocation)
+- [ ] Add WebSocket endpoint for real-time portfolio updates
+- [ ] Add portfolio history tracking endpoint
+- [ ] Enhance auth with proper database persistence
+
+## Phase 11: Polish & Verification
+- [ ] End-to-end flow testing (register → connect → DAQ → dashboard)
+- [ ] Animation performance optimization
+- [ ] Error handling and offline states
+- [ ] Build verification (Expo build for Android/iOS)

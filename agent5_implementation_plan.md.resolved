@@ -1,0 +1,249 @@
+# Agent 5 — News Sentiment Intelligence Agent (Hedge Fund Level)
+
+## Deep Analysis of [news.txt](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/news.txt) Blueprint
+
+The blueprint defines a **7-step pipeline** that transforms raw financial news into structured market signals. Here is what was requested and what I am adding on top:
+
+| Step | Blueprint Requirement | My Enhancement |
+|------|----------------------|----------------|
+| 1 | News Sources (GDELT, NewsAPI, CryptoPanic, RSS) | Add **deduplication**, **rate limiting**, **circuit breakers**, fallback chains |
+| 2 | News Collector (feedparser) | Multi-source **async collector** with retry, caching, and health monitoring |
+| 3 | News Cleaning (basic string ops) | Full **NLP pipeline**: dedup, language detection, boilerplate removal, relevance filtering |
+| 4 | Embedding Model (MiniLM-L6-v2) | **Semantic similarity clustering** + duplicate detection via cosine similarity |
+| 5 | Sentiment Analysis (FinBERT) | **Hybrid FinBERT + LLM** dual-analysis with confidence arbitration |
+| 6 | Impact Score (basic formula) | **Multi-factor scoring**: source reputation × sentiment strength × topic importance × temporal recency × entity relevance |
+| 7 | Entity Extraction (spaCy NER) | **Financial entity recognition** with custom asset ticker mapping + sector classification |
+| — | Temporal Aggregation ("monster feature") | Full **momentum signals** (1h, 24h, 7d) with exponential weighted moving averages |
+| — | Event Detection AI ("very important advice") | **Black swan detector**: Fed meetings, ETF approvals, regulation changes, geopolitical shocks |
+| — | Integration with Agent 3 | Full pipeline integration with **schema contract**, orchestrator validation, and signal consumption |
+
+---
+
+## Proposed Changes
+
+### Config Layer
+
+#### [MODIFY] [settings.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/config/settings.py)
+
+Add `NewsConfig` class with:
+- NewsAPI key management
+- RSS feed URLs (Reuters, Bloomberg, CNBC, FT)
+- GDELT API endpoint
+- CryptoPanic API endpoint  
+- Source reputation weights (Reuters=1.0, Bloomberg=1.0, CNBC=0.8, Blogs=0.5)
+- Collection intervals and cache TTLs
+- Maximum articles per batch
+- Sentiment thresholds
+- Embedding model name
+- Impact score formula coefficients
+
+---
+
+### Schema Layer
+
+#### [NEW] [news_output.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/schemas/news_output.py)
+
+Pydantic schema defining the Agent 5 output contract. Models include:
+
+- `NewsArticle` — Individual processed article (title, source, sentiment, entities, impact)
+- `SentimentResult` — Dual-model sentiment (FinBERT + LLM consensus)
+- `EntityExtraction` — Detected financial entities with asset mapping
+- `ImpactAssessment` — Multi-factor impact scoring
+- `EventDetection` — Black swan / macro event classification
+- `TemporalSentiment` — Aggregated sentiment across time windows (1h/24h/7d)
+- `MarketSignal` — Final structured signal (bullish/bearish/neutral + confidence)
+- `Agent5Output` — Complete output with all sub-models, metadata, execution log
+
+#### [MODIFY] [__init__.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/schemas/__init__.py)
+
+Export `Agent5Output` and `validate_news_output`.
+
+---
+
+### ML Layer (6 New Modules)
+
+#### [NEW] [news_collector.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/news_collector.py)
+
+Multi-source news collector with:
+- **NewsAPI integration** — Top headlines + everything search for financial keywords
+- **RSS feed parser** — feedparser-based collection from Reuters, Bloomberg, CNBC, FT
+- **GDELT integration** — Global event database for geopolitical/macro news
+- **CryptoPanic integration** — Crypto-specific news aggregation
+- **Deduplication** — Title similarity-based dedup before processing
+- **Rate limiting** — Per-source rate limiting to respect API quotas
+- **Fallback chain** — If primary source fails, try secondaries gracefully
+- **Mock mode** — Return pre-built mock articles for testing without API keys
+
+#### [NEW] [news_processor.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/news_processor.py)
+
+Article processing pipeline:
+- **Text cleaning** — Remove HTML, boilerplate, ads, non-English content
+- **Relevance filtering** — Score articles by financial keyword density
+- **Entity extraction** — spaCy NER + custom financial entity matcher (tickers, asset classes, institutions)
+- **Topic classification** — Map articles to topics: `interest_rates`, `inflation`, `crypto`, `earnings`, `geopolitical`, `regulation`, `commodities`
+- **Asset mapping** — Map extracted entities to portfolio assets (BTC → crypto, Federal Reserve → bonds, Apple → SPY/tech)
+
+#### [NEW] [sentiment_engine.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/sentiment_engine.py)
+
+Hybrid sentiment analysis:
+- **FinBERT primary** — Financial-domain-specific transformer model (`ProsusAI/finbert`)
+- **LLM secondary** — Use existing Gemini/Groq client for deeper contextual sentiment
+- **Confidence arbitration** — When FinBERT and LLM disagree, use weighted consensus
+- **Numeric conversion** — positive=+1, neutral=0, negative=-1, scaled by confidence
+- **Batch processing** — Process multiple articles efficiently
+- **Fallback** — If FinBERT unavailable, use LLM-only; if LLM unavailable, use FinBERT-only
+
+#### [NEW] [news_embedding.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/news_embedding.py)
+
+Vector embedding system:
+- **Model**: `sentence-transformers/all-MiniLM-L6-v2` (384-dim, fast, free)
+- **Semantic similarity** — Cosine similarity for duplicate/near-duplicate detection
+- **Article clustering** — Group related articles about the same event
+- **Trend detection** — Track embedding drift over time for emerging narratives
+- **Caching** — Cache embeddings to avoid recomputation
+
+#### [NEW] [impact_scorer.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/impact_scorer.py)
+
+Multi-factor impact scoring:
+- **Source weight** — Reuters/Bloomberg=1.0, CNBC/WSJ=0.8, CryptoPanic=0.7, Blogs=0.3
+- **Sentiment strength** — abs(sentiment_score) × confidence
+- **Topic importance** — `interest_rates`=1.0, `regulation`=0.9, `earnings`=0.7, etc.
+- **Temporal recency** — Exponential decay: articles lose 50% impact every 6 hours
+- **Entity relevance** — How directly the entity maps to portfolio assets
+- **Article clustering boost** — If multiple articles about same event, boost impact
+- **Final formula**: `impact = source_w × sentiment_strength × topic_w × recency × entity_relevance × cluster_boost`
+
+#### [NEW] [event_detector.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/event_detector.py)
+
+Black swan / macro event detection:
+- **Pattern matching** — Keyword detection for known event types (Fed meetings, ETF approvals, sanctions, wars, bank failures)
+- **Anomaly detection** — Sudden spike in article volume for specific entities
+- **Severity classification** — routine, significant, major, critical, black_swan
+- **Market impact prediction** — Expected direction and magnitude per asset class
+- **Alert generation** — Special flag for events requiring immediate portfolio review
+
+#### [NEW] [temporal_aggregator.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/temporal_aggregator.py)
+
+Temporal sentiment momentum:
+- **Time windows** — 1 hour, 24 hours, 7 days
+- **Exponentially weighted** — Recent articles weighted more heavily
+- **Per-asset-class sentiment** — Separate trends for crypto, equities, bonds, commodities
+- **Momentum signals** — Direction: accelerating, stable, decelerating
+- **Regime sentiment** — Overall market sentiment regime (very_bearish → very_bullish)
+
+---
+
+### LLM Layer
+
+#### [NEW] [news_analyst.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/llm/news_analyst.py)
+
+LLM-powered market signal synthesis:
+- **Structured prompt** — Feed processed articles + sentiment + entities to LLM
+- **Market signal generation** — LLM produces bullish/bearish/neutral per asset class
+- **Narrative generation** — Institutional-quality news intelligence briefing
+- **Risk event assessment** — LLM evaluates severity of detected events
+- **Recommendation** — Specific allocation adjustment recommendations
+- Uses existing [gemini_client.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/llm/gemini_client.py) / [groq_client.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/llm/groq_client.py) infrastructure
+
+---
+
+### Agent Layer
+
+#### [NEW] [agent5_news.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent5_news.py)
+
+Full agent orchestrator following the same patterns as Agents 1-4:
+- **10-step pipeline**: Collect → Clean → Embed → Deduplicate → Analyze Sentiment → Score Impact → Detect Events → Aggregate Temporal → LLM Synthesis → Assemble Output
+- **[run(mock=False)](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent4_supervisor.py#44-208)** — Live mode with real API calls
+- **[run_mock()](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent3_strategist.py#376-401)** — Mock mode with pre-built articles
+- **Structured execution logging** — Same pattern as other agents
+- **Schema validation** — Output validated against `Agent5Output`
+- **Error handling** — Graceful degradation at every step
+
+#### [MODIFY] [__init__.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/__init__.py)
+
+Export `Agent5NewsIntelligence`.
+
+---
+
+### Integration Layer
+
+#### [MODIFY] [orchestrator.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/orchestrator.py)
+
+- Add Agent 5 to the pipeline **between Agent 1 and Agent 3**
+- Agent 5 receives Agent 1 output as context (market regime awareness)
+- Agent 5 output is validated against `Agent5Output` schema
+- Agent 5 signals are passed to Agent 3 (allocation optimizer can bias weights based on news sentiment)
+- Agent 5 signals are also passed to Agent 4 (risk supervisor evaluates news risk)
+
+New pipeline flow:
+```
+Agent 1 (Macro) → Agent 5 (News) → Agent 2 (Profile) → Agent 3 (Strategist) → Agent 4 (Risk)
+```
+
+#### [MODIFY] [main.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/main.py)
+
+- Add `--agent 5` / `--agent news` CLI entry
+- Add `run_agent5()` function
+
+#### [MODIFY] [requirements.txt](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/requirements.txt)
+
+New dependencies:
+```
+feedparser>=6.0.0            # RSS feed parsing
+newsapi-python>=0.2.7        # NewsAPI client
+sentence-transformers>=2.2.0 # Embedding model
+transformers>=4.35.0         # FinBERT sentiment
+torch>=2.0.0                 # PyTorch backend for transformers
+spacy>=3.7.0                 # NER entity extraction
+```
+
+#### [NEW] [api/routes/news.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/api/routes/news.py)
+
+REST API endpoints:
+- `GET /api/news/latest` — Latest processed news signals
+- `GET /api/news/sentiment` — Current aggregated sentiment by asset class
+- `GET /api/news/events` — Detected events and alerts
+- `POST /api/news/analyze` — Trigger fresh news analysis
+
+---
+
+## Verification Plan
+
+### Automated Tests
+
+#### [NEW] [tests/test_agent5.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/tests/test_agent5.py)
+
+Test suite covering:
+1. **Mock pipeline** — Run `agent5.run_mock()` and validate output against `Agent5Output` schema
+2. **Schema validation** — Test that output passes Pydantic validation
+3. **Sentiment engine** — Test FinBERT mock output mapping
+4. **Impact scoring** — Test formula with known inputs
+5. **Event detection** — Test keyword pattern matching
+6. **Temporal aggregation** — Test time-windowed sentiment computation
+7. **Orchestrator integration** — Test full pipeline with Agent 5 included
+
+Run with:
+```powershell
+cd "c:\Users\yassi\OneDrive\Desktop\pfa f"
+python -m pytest tests/test_agent5.py -v
+```
+
+### Manual Verification
+
+1. Run the mock pipeline:
+```powershell
+cd "c:\Users\yassi\OneDrive\Desktop\pfa f"
+python main.py --agent 5 --mock
+```
+Verify: Output JSON contains all expected fields (sentiment, entities, impact_score, market_signal, temporal_sentiment).
+
+2. Run the full orchestrator:
+```powershell
+python main.py --pipeline --mock
+```
+Verify: All 5 agents run, Agent 5 output is validated, Agent 3 receives news signals.
+
+3. Verify schema validation:
+```powershell
+python -c "from schemas.news_output import Agent5Output; print('Schema loaded OK')"
+```

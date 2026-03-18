@@ -1,0 +1,62 @@
+# Adversarial Test Suite Architecture (Step 5)
+
+## Objective
+To mathematically prove the "Monster Masterpiece" credentials of the Hybrid Intelligence Portfolio System, we must deploy it against extreme historical anomalies and adversarial inputs. If the system treats the 2008 Crash identical to the 2020 COVID shock, it possesses fake intelligence. 
+
+The Adversarial Test Suite will inject point-in-time simulated market data and manipulated behavioral profiles into the active Orchestrator pipeline to verify that the Agent 4 Risk Supervisor mathematically intervenes as designed.
+
+## Phase 1: Historical Data Injection Layer
+Right now, [MarketDataAggregator](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/data/market_data.py#381-502) calls Binance and TwelveData for the *last 252 days*.
+We will build a `ScenarioDataLoader` that intercepts this process.
+
+### Scenario Definitions
+1. **Scenario 1: 2008-Style Credit Crash**
+   - **Market**: S&P 500 down 45%, VIX at 80, massive cross-asset correlation (everything falls together).
+   - **Expected Behavior**: Agent 1 flags `bear_high_vol`. Agent 3's CVaR limit breaches. Agent 4 forces minimum 45% defensive (Bonds/Cash) and slashes equity caps to 35%.
+
+2. **Scenario 2: 2020 COVID Shock (V-Shape)**
+   - **Market**: Immediate 30% drop, followed by extreme V-shape recovery and limitless liquidity.
+   - **Expected Behavior**: Fast transition from `bear_high_vol` to `bull_high_vol`. Agent 4 permits higher equity risk but restricts crypto concentration due to volatility.
+
+3. **Scenario 3: 2022 High Inflation Tightening Cycle**
+   - **Market**: Equities and Bonds fall *together* (correlation breaks historical norms). Cash is king.
+   - **Expected Behavior**: Agent 3's traditional 60/40 solver fails correlation checks. Agent 4 must override standard Bond allocations and drastically increase Cash allocations.
+
+4. **Scenario 4: Bull Market Euphoria (2021 Style)**
+   - **Market**: VIX < 15, everything up, crypto exploding.
+   - **Expected Behavior**: Agent 1 flags `bull_low_vol`. Systems permit maximum growth, but Concentration Audits kick in to stop HHI index from blowing out (preventing 80% crypto allocations).
+
+## Phase 2: Behavioral & Contradiction Scenarios
+We must test how the system handles a user lying or acting irrationally.
+
+5. **Scenario 5: User Overconfidence Bias**
+   - **Input**: User self-reports as "Aggressive" but answers behavioral questions indicating panic selling.
+   - **Expected Behavior**: Agent 2 detects [Contradiction](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/schemas/agent2_output.py#113-128). Downgrades reliability score. Agent 4 reads the low reliability and enforces stricter `Dynamic Coherence Distance` thresholds, curbing Agent 3's aggressive allocation.
+
+6. **Scenario 6: Missing Data / Agent Failure**
+   - **Input**: TwelveData API fails, or FRED macroeconomic data is missing.
+   - **Expected Behavior**: Agent 1 marks components as `degraded`. Confidence math plummets. Agent 4 restricts portfolio risk dramatically due to systemic blindness.
+
+## Phase 3: The Threat Matrix Execution Harness
+We will create `test_adversarial.py`, a dedicated test suite using `pytest`.
+
+```python
+# Pseudo-code architecture for the harness
+def test_scenario_1_2008_crash():
+    # 1. Inject 2008 data
+    mock_market_data = load_scenario("2008_crash")
+    
+    # 2. Run Orchestrator
+    result = orchestrator.run_pipeline(market_data_override=mock_market_data)
+    
+    # 3. Assert Monster Masterpiece Safety Guardrails
+    assert result.agent1.regime == "bear_high_vol"
+    assert result.final_portfolio["CASH"] + result.final_portfolio["BND"] >= 0.45
+    assert result.agent4.audits["concentration_audit"] == "PASS"
+```
+
+## Implementation Steps
+1. Modify [data/market_data.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/data/market_data.py) to accept historical override files.
+2. Generate synthetic/historical datasets for the 4 market scenarios.
+3. Write `test_adversarial.py` to execute the Orchestrator against these datasets.
+4. Run the suite to mathematically prove intelligence.

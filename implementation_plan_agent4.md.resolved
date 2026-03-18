@@ -1,0 +1,108 @@
+# Agent 4 — Meta-Risk & Supervision Agent
+
+## Goal
+
+Build Agent 4: a Portfolio Risk Oversight AI that acts as Chief Risk Officer. It ingests the outputs from Agent 1, 2, and 3, independently audits the proposed allocation, and either **approves**, **adjusts**, or **rejects** it. This is the final gatekeeper that prevents catastrophic advice.
+
+## Architecture
+
+Agent 4 runs **5 independent ML risk audits** and then an **LLM adjudication** that synthesizes all findings into a final verdict.
+
+```
+Agent 1 (Market) ─┐
+Agent 2 (Profile) ─┤──▶ 5 ML Risk Audits ──▶ LLM Chief Risk Officer ──▶ Final Verdict
+Agent 3 (Allocation)─┘
+```
+
+### 5 ML Risk Audit Submodules
+
+| # | Audit | What It Checks |
+|---|-------|----------------|
+| 1 | **Regime Consistency Audit** | Is this allocation appropriate for the detected market regime? (e.g., growth allocation in a bear regime = RED FLAG) |
+| 2 | **Profile Alignment Audit** | Does the allocation match the investor's risk score, behavioral type, max drawdown? |
+| 3 | **Drawdown & Tail Risk Guardrails** | Does the Monte Carlo simulation show drawdowns exceeding the investor's tolerance? |
+| 4 | **Concentration & Leverage Audit** | Is any asset overweighted? Is crypto too high for the vol regime? HHI concentration index. |
+| 5 | **Cross-Agent Coherence Audit** | Are there contradictions between what Agent 1 says and what Agent 3 did? |
+
+## Proposed Changes
+
+### Output Schema
+
+#### [NEW] [agent4_output.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/schemas/agent4_output.py)
+
+- `RiskAuditResult`: per-audit verdict (pass/warning/fail), severity, details
+- `AdjustedAllocation`: if Agent 4 modifies weights
+- `Agent4Output`: validation_status (`approved` / `approved_with_adjustments` / [rejected](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/tests/test_agent2.py#421-442)), confidence, risk warnings, adjusted allocation, audit trail
+
+---
+
+### ML / Risk Audit Components
+
+#### [NEW] [risk_auditor.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/risk_auditor.py)
+
+All 5 audit functions as static methods in a `RiskAuditor` class:
+1. `audit_regime_consistency()` — Checks if allocation strategy matches regime
+2. `audit_profile_alignment()` — Verifies risk score → allocation mapping
+3. `audit_drawdown_guardrails()` — Compares MC drawdown vs investor tolerance
+4. `audit_concentration()` — HHI index, single-asset caps, crypto limits per vol state
+5. `audit_cross_agent_coherence()` — Detects contradictions between agents
+
+Each returns a standardized `RiskAuditResult` dict.
+
+#### [NEW] [allocation_adjuster.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/ml/allocation_adjuster.py)
+
+When audits flag problems, this module **mathematically rebalances** the allocation:
+- Caps overweight assets
+- Increases defensive assets (bonds/cash) in bear regimes
+- Ensures weights still sum to 1.0
+- Preserves investor intent as much as possible
+
+---
+
+### LLM Layer
+
+#### [NEW] [risk_adjudicator.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/llm/risk_adjudicator.py)
+
+LLM-powered Chief Risk Officer that:
+- Receives all 5 audit results
+- Makes the final approve/adjust/reject decision
+- Generates institutional-quality reasoning
+- Uses the exact "Be skeptical. Never assume the previous agent is correct" prompt
+- Fallback: rule-based decision when LLM unavailable
+
+---
+
+### Agent Orchestrator
+
+#### [NEW] [agent4_supervisor.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/agents/agent4_supervisor.py)
+
+Pipeline:
+1. Load all upstream outputs (Agent 1 + 2 + 3)
+2. Run 5 independent risk audits
+3. If any audit fails → compute adjusted allocation
+4. LLM adjudication → final verdict
+5. Assemble validated output
+
+#### [MODIFY] [main.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/main.py)
+
+Add `--agent 4` CLI support with `--agent3-json` param.
+
+---
+
+### Tests
+
+#### [NEW] [test_agent4.py](file:///c:/Users/yassi/OneDrive/Desktop/pfa%20f/tests/test_agent4.py)
+
+~25 tests covering all 5 audits, allocation adjuster, schema validation, and full pipeline.
+
+## Verification Plan
+
+### Automated Tests
+```bash
+pytest tests/test_agent4.py -v
+```
+
+### Live Pipeline (Full 4-Agent Chain)
+```bash
+python main.py --agent 4 --agent1-json live_output.json --agent2-json agent2_live_output.json --agent3-json agent3_live_output.json
+```

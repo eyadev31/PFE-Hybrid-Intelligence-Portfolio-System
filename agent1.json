@@ -1,0 +1,96 @@
+{
+  "timestamp": "2026-02-27T11:40:11.692675Z",
+  "data_freshness": "2026-02-27T11:40:11.692675Z",
+  "market_regime": {
+    "primary_regime": "bull_low_vol",
+    "confidence": 0.98,
+    "hmm_regime": "bull_low_vol",
+    "rf_regime": "bull_low_vol",
+    "models_agree": true,
+    "regime_duration_days": 4,
+    "transition_probability": 0.2339,
+    "description": "Bullish trend with low volatility \u2014 risk-on environment"
+  },
+  "volatility_state": {
+    "current_state": "normal",
+    "vix_level": 19.13,
+    "realized_vol_percentile": 35.5,
+    "vol_trend": "stable",
+    "vol_of_vol": "normal",
+    "term_structure": "unknown"
+  },
+  "macro_environment": {
+    "macro_regime": "stable_growth",
+    "monetary_policy": "tightening",
+    "inflation_state": "above_target",
+    "growth_state": "moderate_growth",
+    "liquidity": "neutral",
+    "composite_score": -0.1,
+    "key_indicators": {
+      "fed_funds_rate": 5.25,
+      "treasury_10y": 4.35,
+      "treasury_2y": 4.6,
+      "unemployment": 3.9
+    },
+    "yield_curve": {
+      "inverted": true,
+      "spreads": {
+        "10y_2y": -0.25,
+        "10y_3m": -0.15
+      },
+      "signal": "inverted_but_improving"
+    }
+  },
+  "systemic_risk": {
+    "overall_risk_level": 0.1518,
+    "risk_category": "low",
+    "risk_signals": {
+      "correlation_convergence": 0.0158,
+      "vol_regime_break": 0.0,
+      "yield_curve_inversion": true,
+      "credit_stress": 0.0,
+      "contagion_score": 0.1432
+    },
+    "risk_assessment": "LOW: Markets showing normal risk characteristics. Yield curve inverted \u2014 historic recession warning signal.",
+    "recommended_caution": false
+  },
+  "cross_asset_analysis": {
+    "correlation_state": "normal",
+    "median_correlation": 0.03697568151666941,
+    "risk_appetite_index": 0.8482000000000001,
+    "key_correlations": {}
+  },
+  "llm_reasoning": {
+    "market_narrative": "LLM analysis unavailable -- pure quantitative output.",
+    "key_risks": [
+      "Monetary policy tightening -- negative for risk assets",
+      "Yield curve inverted (10Y-2Y: -0.25%) -- historic recession predictor"
+    ],
+    "opportunities": [],
+    "asset_class_outlook": {},
+    "sector_implications": {},
+    "risk_budget_suggestion": {},
+    "confidence_level": 0.0,
+    "uncertainty_factors": [
+      "LLM reasoning not available"
+    ]
+  },
+  "agent_metadata": {
+    "agent_id": "agent1_macro_intelligence",
+    "version": "1.0.0",
+    "execution_time_ms": 0,
+    "llm_calls": 0,
+    "llm_total_latency_ms": 0,
+    "models_used": [
+      "hmm_regime_v1",
+      "rf_regime_v1",
+      "vol_classifier_v1",
+      "macro_analyzer_v1",
+      "risk_detector_v1"
+    ],
+    "data_sources": [
+      "mock_synthetic"
+    ],
+    "data_quality": "mock"
+  }
+}
